@@ -1,32 +1,43 @@
 {% extends "base.html" %}
 
-{% block title %}My Profile{% endblock %}
-
-{% block heading %}Simple Blog - Blog Page{% endblock %}
+{% block heading %}My Profile{% endblock %}
 
 {% block content %}
-    <h2>Total Number of Posts: {{ posts|length }}</h2>
-
-    {% for post in posts %}
-        <div class="post">
-
-            {% if post.status == 'published' %}
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.content|truncate }}</p>
-                <p>Published on: {{ post.publication_date }}</p>
-
-                <h4>Comments:</h4>
-                <ul>
-                    {% for comment in post.comments %}
-                        <li class="comment">{{ comment.author }}-: {{ comment.content }}</li>
-                        
-
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>This post is still in draft mode.</p>
-            {% endif %}
+    <div class="container">
+        <div class="sidebar">
+            <h2>Options</h2>
+            <ul>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#resume">Resume</a></li>
+            </ul>
         </div>
-        <hr>
-    {% endfor %}
+
+        <div class="main-content">
+            <section id="education">
+                <h2>Education</h2>
+                <!-- Fetch and display education data from FastAPI endpoint -->
+                <p>Education details go here...</p>
+            </section>
+
+            <section id="experience">
+                <h2>Experience</h2>
+                <!-- Fetch and display experience data from FastAPI endpoint -->
+                <p>Experience details go here...</p>
+            </section>
+
+            <section id="skills">
+                <h2>Skills</h2>
+                <!-- Fetch and display skills data from FastAPI endpoint -->
+                <p>Skills details go here...</p>
+            </section>
+
+            <section id="resume">
+                <h2>Resume</h2>
+                <!-- Add a file showcasing option to pull resume from the server -->
+                <a href="{{ url_for('get_resume') }}" target="_blank">View Resume</a>
+            </section>
+        </div>
+    </div>
 {% endblock %}
