@@ -1,20 +1,13 @@
-from datetime import datetime
+from datetime import date
 
 from pydantic import BaseModel
 
 
 class BasicInfoBase(BaseModel):
     name: str
-    email: str
-    phone: str | None = None
-    location: str | None = None
-    website: str | None = None
-    linkedin: str | None = None
-    github: str | None = None
 
 
 class BasicInfoCreate(BasicInfoBase):
-    name: str
     email: str
     phone: str | None = None
     location: str | None = None
@@ -25,144 +18,150 @@ class BasicInfoCreate(BasicInfoBase):
 
 class BasicInfo(BasicInfoBase):
     id: int
-    name: str
-    email: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class EducationBase(BaseModel):
     institution: str
-    location: str | None = None
-    duration_start: datetime
-    duration_end: datetime | None = None
     degree: str
+
+
+class EducationCreate(EducationBase):
+    location: str | None = None
+    duration_start: date
+    duration_end: date | None = None
     major: str | None = None
     minor: str | None = None
     gpa: str | None = None
     courses: str | None = None
 
 
-class EducationCreate(EducationBase):
-    pass
-
-
 class Education(EducationBase):
     id: int
-    institution: str
-    degree: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ExperienceBase(BaseModel):
     company: str
-    location: str | None = None
     title: str
-    duration_start: datetime
-    duration_end: datetime | None = None
-    description: str | None = None
 
 
 class ExperienceCreate(ExperienceBase):
-    pass
+    location: str | None = None
+    duration_start: date
+    duration_end: date | None = None
+    description: str | None = None
 
 
 class Experience(ExperienceBase):
     id: int
-    company: str
-    title: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class SkillsBase(BaseModel):
     skill: str
+
+
+class SkillsCreate(SkillsBase):
     subcategory: str | None = None
     proficiency: str | None = None
 
 
-class SkillsCreate(SkillsBase):
-    pass
-
-
 class Skills(SkillsBase):
     id: int
-    skill: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ProjectsBase(BaseModel):
     title: str
-    description: str | None = None
 
 
 class ProjectsCreate(ProjectsBase):
-    pass
+    description: str | None = None
+    link: str | None = None
 
 
 class Projects(ProjectsBase):
     id: int
-    title: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class CertificationsBase(BaseModel):
     title: str
-    description: str | None = None
-    date: datetime | None = None
-    link: str | None = None
+    issuer: str
 
 
 class CertificationsCreate(CertificationsBase):
-    pass
+    description: str | None = None
+    achievement_date: date | None = None
+    link: str | None = None
 
 
 class Certifications(CertificationsBase):
     id: int
-    title: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class HonorsAndAwardsBase(BaseModel):
     title: str
-    description: str | None = None
 
 
 class HonorsAndAwardsCreate(HonorsAndAwardsBase):
-    pass
+    description: str | None = None
 
 
 class HonorsAndAwards(HonorsAndAwardsBase):
     id: int
-    title: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class InterestsBase(BaseModel):
     interest: str
-    description: str | None = None
-    subcategory: str | None = None
 
 
 class InterestsCreate(InterestsBase):
-    pass
+    subcategory: str | None = None
 
 
 class Interests(InterestsBase):
     id: int
-    interest: str
+    fk_user: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+class ResumeBase(BaseModel):
+    file_path: str
+
+
+class ResumeCreate(ResumeBase):
+    is_latest: bool
+
+
+class Resume(ResumeBase):
+    id: int
+    fk_user: int
+
+    class Config:
+        from_attributes = True

@@ -1,7 +1,7 @@
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from src.data.db_init import Base
+from .db_init import Base
 
 
 class BasicInfo(Base):
@@ -9,12 +9,21 @@ class BasicInfo(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    email = Column(String)
-    phone = Column(String)
+    email = Column(String, unique=True)
+    phone = Column(String, unique=True)
     location = Column(String)
     website = Column(String)
     linkedin = Column(String)
     github = Column(String)
+
+    education = relationship("Education", back_populates="user")
+    experience = relationship("Experience", back_populates="user")
+    skills = relationship("Skills", back_populates="user")
+    projects = relationship("Projects", back_populates="user")
+    certifications = relationship("Certifications", back_populates="user")
+    honors_and_awards = relationship("HonorsAndAwards", back_populates="user")
+    interests = relationship("Interests", back_populates="user")
+    resume = relationship("Resume", back_populates="user")
 
 
 class Education(Base):
@@ -23,14 +32,16 @@ class Education(Base):
     id = Column(Integer, primary_key=True, index=True)
     institution = Column(String)
     location = Column(String)
-    duration_start = Column(DateTime)
-    duration_end = Column(DateTime)
+    duration_start = Column(Date)
+    duration_end = Column(Date)
     degree = Column(String)
     major = Column(String)
     minor = Column(String)
     gpa = Column(String)
     courses = Column(String)
-    user = Column(Integer, ForeignKey("basic_info.id"))
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="education")
 
 
 class Experience(Base):
@@ -40,9 +51,12 @@ class Experience(Base):
     company = Column(String)
     location = Column(String)
     title = Column(String)
-    duration_start = Column(DateTime)
-    duration_end = Column(DateTime)
+    duration_start = Column(Date)
+    duration_end = Column(Date)
     description = Column(String)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="experience")
 
 
 class Skills(Base):
@@ -52,6 +66,9 @@ class Skills(Base):
     skill = Column(String)
     subcategory = Column(String)
     proficiency = Column(String)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="skills")
 
 
 class Projects(Base):
@@ -60,6 +77,10 @@ class Projects(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     description = Column(String)
+    link = Column(String)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="projects")
 
 
 class Certifications(Base):
@@ -67,9 +88,13 @@ class Certifications(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
+    issuer = Column(String)
     description = Column(String)
-    date = Column(DateTime)
+    achievement_date = Column(Date)
     link = Column(String)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="certifications")
 
 
 class HonorsAndAwards(Base):
@@ -78,6 +103,9 @@ class HonorsAndAwards(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     description = Column(String)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="honors_and_awards")
 
 
 class Interests(Base):
@@ -86,3 +114,17 @@ class Interests(Base):
     id = Column(Integer, primary_key=True, index=True)
     interest = Column(String)
     subcategory = Column(String)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="interests")
+
+
+class Resume(Base):
+    __tablename__ = "resume"
+
+    id = Column(Integer, primary_key=True, index=True)
+    file_path = Column(String)
+    is_latest = Column(Boolean)
+    fk_user = Column(Integer, ForeignKey("basic_info.id"))
+
+    user = relationship("BasicInfo", back_populates="resume")
