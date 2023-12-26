@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}Asif Iqbal Rahaman{% endblock %}</title>
+    <title>{% block title %}My Bio{% endblock %}</title>
     <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', path='/dark-mode.js') }}" defer></script>
 </head>
 <body>
-    <div class="toggle-container">
+    <div class="dark-mode-toggle">
+    <p id="toggle-text"></p>
         <input type="checkbox" id="dark-mode-toggle">
-        <label for="dark-mode-toggle">Toggle Dark Mode</label>
+        <label for="dark-mode-toggle">
+            <span class="toggle-icon" id="moon">&#127761;</span>
+            <span class="toggle-icon" id="sun">&#127774;</span>
+        </label>
     </div>
-
-    <h1>{% block heading %}My Profile{% endblock %}</h1>
-
-    {% block content %}
-    {% endblock %}
-
+    <div id="wrapper">
+        <div class="content">
+            <h1>{% block heading %}Profile{% endblock %}</h1>
+    
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
     {% include "footer.html" %}
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            var wrapperContent = document.getElementById('wrapper');
+            sidebar.classList.toggle('open');
+            wrapperContent.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>

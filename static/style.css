@@ -1,9 +1,13 @@
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
   background-color: #f5f5f5;
-  transition: background-color 0.3s ease;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -11,6 +15,35 @@ h2,
 h3,
 h4 {
   color: #333;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+footer {
+  background-color: #e6e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4 {
+  color: #fff;
+}
+
+#wrapper {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+#wrapper.open {
+  margin-left: 250px;
 }
 
 .post {
@@ -41,13 +74,92 @@ h4 {
   border-radius: 5px;
 }
 
-footer {
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: center;
+.logo {
+  max-width: 50px; /* Adjust the size as needed */
+  height: auto;
+}
+
+.social-media-links {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
 }
 
 .dark-mode {
   background-color: #333;
   color: #fff;
+}
+
+.dark-mode footer {
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#dark-mode-toggle {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 25px;
+}
+
+.toggle-icon {
+  position: absolute;
+  font-size: 18px;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+#moon {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+#sun {
+  transform: translateX(15px);
+  opacity: 1;
+}
+
+#dark-mode-toggle:checked + label #moon {
+  transform: translateX(15px);
+  opacity: 1;
+}
+
+#dark-mode-toggle:checked + label #sun {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+#sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  left: -250px;
+  transition: left 0.3s ease;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar-toggle {
+  position: fixed;
+  left: 10px;
+  top: 10px;
 }

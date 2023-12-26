@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Home</h1>
-    <p> Welcome to the home page!</p>
+    {# <h2>Home</h2> #}
+    <p> Welcome to my home page!</p>
+    <br>
+    <p>You can check out my LinkedIn or GitHub profiles from the bottom of the page...<br>    
+    Or go into some other details of my profile in the next page by clicking on my image below...</p>
+    <div style="text-align: center;">
+        <a href="{{ url_for('profile') }}">
+            <img src="{{ url_for('static', path='image.jpg') }}" alt="Asif Iqbal Rahaman" style="max-width: 50%; max-height: 500px;">
+        </a>
+    </div>
 {% endblock %}
 ```

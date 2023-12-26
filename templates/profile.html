@@ -4,8 +4,9 @@
 
 {% block content %}
     <div class="container">
-        <div class="sidebar">
-            <h2>Options</h2>
+    <button id="sidebar-toggle">☰</button>
+        <div id="sidebar" class="sidebar" style="margin-left: 10px;">
+            <h2>Jump To...</h2>
             <ul>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -36,8 +37,9 @@
             <section id="resume">
                 <h2>Resume</h2>
                 <!-- Add a file showcasing option to pull resume from the server -->
-                <a href="{{ url_for('get_resume') }}" target="_blank">View Resume</a>
+                {# <a href="{{ url_for('get_resume') }}" target="_blank">View Resume</a> #}
             </section>
         </div>
     </div>
+    
 {% endblock %}
