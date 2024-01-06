@@ -41,5 +41,12 @@
             </section>
         </div>
     </div>
-    
+    <script>
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            var wrapperContent = document.getElementById('wrapper');
+            sidebar.classList.toggle('open');
+            wrapperContent.classList.toggle('open');
+        });
+    </script>
 {% endblock %}
