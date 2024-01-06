@@ -35,6 +35,8 @@ if (darkMode === "enabled") {
   disableDarkMode();
 } else if (systemDarkMode) {
   enableDarkMode();
+} else {
+  disableDarkMode();
 }
 
 darkModeToggle.addEventListener("click", () => {
