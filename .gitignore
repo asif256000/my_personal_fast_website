@@ -2,3 +2,4 @@
 .env
 *.db
 *.pdf
+.DS_Store
