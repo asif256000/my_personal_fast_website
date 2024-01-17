@@ -1,0 +1,186 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+footer {
+  background-color: #e6e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+p {
+  font-size: large;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4 {
+  color: #fff;
+}
+
+#wrapper {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+#wrapper.open {
+  margin-left: 250px;
+}
+
+.post {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post h3 {
+  margin-top: 0;
+}
+
+.post p {
+  margin-bottom: 10px;
+}
+
+.post ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.logo {
+  max-width: 50px; /* Adjust the size as needed */
+  height: auto;
+}
+
+.social-media-links {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+body.dark-mode a {
+  color: rgb(178, 178, 178);
+}
+
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode footer {
+  background-color: #555;
+  color: #fff;
+  padding: 10px;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#dark-mode-toggle {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 25px;
+}
+
+.toggle-icon {
+  position: absolute;
+  font-size: 18px;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+#moon {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+#sun {
+  transform: translateX(15px);
+  opacity: 1;
+}
+
+#dark-mode-toggle:checked + label #moon {
+  transform: translateX(15px);
+  opacity: 1;
+}
+
+#dark-mode-toggle:checked + label #sun {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+#toggle-text {
+  transition: opacity 0.5s ease;
+}
+
+#sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  left: -250px;
+  transition: left 0.3s ease;
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar-toggle {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+}
+
+.image-link {
+  display: inline-block;
+}
+
+.my-image {
+  max-height: 500px;
+  object-fit: cover;
+}

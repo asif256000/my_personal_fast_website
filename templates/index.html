@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block heading %}
+    My Profile
+{% endblock %}
+
+{% block content %}
+    <p style="font-size: x-large;"> Hi there, this is Asif. Welcome to my home page!</p>
+    <br>
+    <p style="font-size: large;"> Please take a deep dive into my career and experiences by clicking on the image below...</p>
+    <div style="text-align: center;">
+        <a href="{{ url_for('profile') }}" class="image-link">
+            <img src="{{ url_for('static', path='image.jpg') }}" alt="Asif Iqbal Rahaman" class="my-image">
+        </a>
+    </div>
+{% endblock %}
+```
