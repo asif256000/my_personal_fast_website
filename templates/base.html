@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}My Bio{% endblock %}</title>
+    <title>{% block title %}My Profile{% endblock %}</title>
+    <link href="{{ url_for('static', path='/logos/profile_logo.ico') }}" rel="icon">
     <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', path='/dark-mode.js') }}" defer></script>
 </head>
 <body>
+    <script>
+    window.onscroll = function() {
+        var darkModeToggleText = document.querySelector('#toggle-text');
+        if (window.pageYOffset > 75) {
+            darkModeToggleText.style.opacity = '0.1';
+        } else {
+            darkModeToggleText.style.opacity = '1';
+        }
+    };
+    </script>
     <div class="dark-mode-toggle">
     <p id="toggle-text"></p>
         <input type="checkbox" id="dark-mode-toggle">
@@ -16,7 +27,19 @@
     </div>
     <div id="wrapper">
         <div class="content">
-            <h1>{% block heading %}Profile{% endblock %}</h1>
+            
+            <h1>
+            <div style="display: inline-block; vertical-align: middle;">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', path='logos/profile_logo.png') }}" alt="Logo" style="width: 50px;">
+                </a>
+            </div>
+            <div style="display: inline-block; vertical-align: middle;">
+            {% block heading %}
+                Profile
+            {% endblock %}
+            </div>
+            </h1>
     
             {% block content %}
             {% endblock %}

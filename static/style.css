@@ -30,6 +30,10 @@ footer {
   text-align: center;
 }
 
+p {
+  font-size: large;
+}
+
 .dark-mode h1,
 .dark-mode h2,
 .dark-mode h3,
@@ -84,6 +88,10 @@ footer {
   justify-content: center;
   align-items: flex-end;
   height: 100%;
+}
+
+body.dark-mode a {
+  color: rgb(178, 178, 178);
 }
 
 .dark-mode {
@@ -146,6 +154,10 @@ label {
   opacity: 0;
 }
 
+#toggle-text {
+  transition: opacity 0.5s ease;
+}
+
 #sidebar {
   width: 250px;
   height: 100%;
@@ -169,8 +181,6 @@ label {
 }
 
 .my-image {
-  /* border-radius: 50%; */
-  /* max-width: 50%; */
   max-height: 500px;
-/* object-fit: cover;
+  object-fit: cover;
 }

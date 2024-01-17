@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
+{% block heading %}
+    My Profile
+{% endblock %}
+
 {% block content %}
-    <p> Welcome to my home page!</p>
+    <p style="font-size: x-large;"> Hi there, this is Asif. Welcome to my home page!</p>
     <br>
-    <p>You can check out my LinkedIn or GitHub profiles from the bottom of the page...<br>    
-    Or go into some other details of my profile in the next page by clicking on my image below...</p>
+    <p style="font-size: large;"> Please take a deep dive into my career and experiences by clicking on the image below...</p>
     <div style="text-align: center;">
         <a href="{{ url_for('profile') }}" class="image-link">
             <img src="{{ url_for('static', path='image.jpg') }}" alt="Asif Iqbal Rahaman" class="my-image">
