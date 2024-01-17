@@ -14,6 +14,7 @@ class BasicInfoCreate(BasicInfoBase):
     website: str | None = None
     linkedin: str | None = None
     github: str | None = None
+    intro: str | None = None
 
 
 class BasicInfo(BasicInfoBase):
@@ -29,6 +30,7 @@ class EducationBase(BaseModel):
 
 
 class EducationCreate(EducationBase):
+    institution_logo: str | None = None
     location: str | None = None
     duration_start: date
     duration_end: date | None = None
@@ -52,10 +54,11 @@ class ExperienceBase(BaseModel):
 
 
 class ExperienceCreate(ExperienceBase):
+    company_logo: str | None = None
     location: str | None = None
     duration_start: date
     duration_end: date | None = None
-    description: str | None = None
+    description: list | None = None
 
 
 class Experience(ExperienceBase):

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, Column, Date, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from .db_init import Base
@@ -15,6 +15,7 @@ class BasicInfo(Base):
     website = Column(String)
     linkedin = Column(String)
     github = Column(String)
+    intro = Column(String)
 
     education = relationship("Education", back_populates="user")
     experience = relationship("Experience", back_populates="user")
@@ -31,6 +32,7 @@ class Education(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     institution = Column(String)
+    institution_logo = Column(String)
     location = Column(String)
     duration_start = Column(Date)
     duration_end = Column(Date)
@@ -49,11 +51,12 @@ class Experience(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     company = Column(String)
+    company_logo = Column(String)
     location = Column(String)
     title = Column(String)
     duration_start = Column(Date)
     duration_end = Column(Date)
-    description = Column(String)
+    description = Column(JSON)
     fk_user = Column(Integer, ForeignKey("basic_info.id"))
 
     user = relationship("BasicInfo", back_populates="experience")
