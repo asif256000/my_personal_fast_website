@@ -12,68 +12,147 @@ BASIC_DETAILS = {
     "website": "https://asifiqbal.xyz",
     "linkedin": "https://www.linkedin.com/in/asif-iqbal-r/",
     "github": "https://www.github.com/asif256000",
+    "intro": """
+    I am a graduate student at Virginia Tech, pursuing Master of Science in Computer Science with a focus on Data Analysis and AI. 
+    I plan to graduate in Spring '24 and currently looking for full-time opportunities starting May 2024 in Software Development and Data Analytics.
+    <br><br>
+    I am currently working as Graduate Teaching Assistant as well as Student Data Analyst in the Dept of Computational Cell Biology in Virginia Tech, 
+    where I plan to apply my skills and knowledge to solve real-world problems and advance scientific discovery. With my prior experience in the industry 
+    solving various automation problems in both Ericsson and Seclore, I feel that I would be able to contribute a lot in any team I join. I also have 
+    extensive interest and learning experience in AI driven technologies, which gives me an edge in a society moving towards intelligent machines.
+    """,
 }
 EDUCATIONS = [
     {
         "institution": "Virginia Tech",
+        "institution_logo": "VirginiaTech.png",
         "location": "Blacksburg, VA",
         "duration_start": date(2022, 8, 15),
         "duration_end": date(2024, 5, 20),
         "degree": "Master of Science",
         "major": "Computer Science",
         "minor": "Data Analysis and AI",
-        "gpa": "3.8",
+        "gpa": "3.8 out of 4",
         "courses": "Information Visualization, Fundamentals of Information Security, Applications of Machine Learning, Theory of Algorithms, Data Analytics, Computer Vision, Natural Language Processing, AI for Software Delivery",
     },
     {
         "institution": "Vellore Institute of Technology (VIT), Vellore",
+        "institution_logo": "VITVellore.png",
         "location": "Vellore, India",
         "duration_start": date(2015, 7, 11),
         "duration_end": date(2019, 5, 22),
         "degree": "Bachelor of Technology",
         "major": "Computer Science",
         "minor": "Bioinformatics",
-        "gpa": "7.92",
+        "gpa": "7.92 out of 10",
         "courses": "Data Structures and Algorithms, Object Oriented Programming, Database Management Systems, Operating Systems, Network Architecture, Software Engineering, Data Mining, Machine Learning, Deep Learning, Computer Vision, Cyber Security, Internet of Things",
+    },
+    {
+        "institution": "Ramakrishna Mission Vidyalaya, Narendrapur",
+        "institution_logo": "RKMVNDP.png",
+        "location": "Kolkata, India",
+        "duration_start": date(2007, 4, 26),
+        "duration_end": date(2015, 4, 15),
+        "degree": "High School",
+        "major": "Basic Science",
+        "gpa": "95 & 90 out of 100",
+        "courses": "Physics, Chemistry, Mathematics, Statistics, Mechanics, Computer Science, Biology",
     },
 ]
 EXPERIENCES = [
     {
         "company": "Virginia Tech - Department of Computational Cell Biology",
+        "company_logo": "VirginiaTech.png",
         "location": "Blacksburg, VA",
         "title": "Student Data Analyst",
         "duration_start": date(2022, 10, 10),
-        "description": """
-        - Problem Statement: Simulate Cell Cycle with boolean model of cell interactions.
-        - Current work: Analyze the simulation results for all perturbations of the model and identify the perturbations that hinder or improve the cell cycle.
-        - Preprint available: https://www.biorxiv.org/content/10.1101/2023.10.30.564745v1
-        - Future plans: Implementing a better scoring mechanism, optimizing the method to run larger models, and applying the method on models of cancerous cells to identify potential drug targets.
-        """,
+        "description": [
+            ("Problem Statement", "Simulate Cell Cycle with boolean model of cell interactions."),
+            (
+                "Current work",
+                "Analyze the simulation results for all perturbations of the model and identify the perturbations that hinder or improve the cell cycle.",
+            ),
+            ("Preprint", "https://www.biorxiv.org/content/10.1101/2023.10.30.564745v1"),
+            (
+                "Future plans",
+                "Implementing a better scoring mechanism, optimizing the method to run larger models, and applying the method on models of cancerous cells to identify potential drug targets.",
+            ),
+            (
+                "Tech Stack",
+                "Python, Pandas, Multiprocessing, DataClass, PyTest, Logger, Matplotlib, High Performance Computing...",
+            ),
+        ],
     },
     {
         "company": "Seclore Technology Pvt. Ltd.",
+        "company_logo": "Seclore.png",
         "location": "Mumbai, India",
         "title": "Product Engineer",
         "duration_start": date(2021, 12, 6),
         "duration_end": date(2022, 7, 15),
-        "description": """
-        - Cloud automation: Developed DevOps automation that was able to deploy complete product for a client in less than an hour in a fully managed and scalable AWS architecture. This decreased customer onboarding time from several days to few hours.
-        - Customer Infra Stack Codification: Implemented individual customer infrastructure as a AWS Cloudformation stack via aws-cdk and pynamodb modules in Python.
-        - Collaboration: Team of 3 worked with Subversion in an agile environment to develop the cloud automation.
-        """,
+        "description": [
+            (
+                "Cloud automation",
+                "Developed DevOps automation that was able to deploy complete product for a client in less than an hour in a fully managed and scalable AWS architecture. This decreased customer onboarding time from several days to few hours.",
+            ),
+            (
+                "Customer Infra Stack Codification",
+                "Implemented individual customer infrastructure as a AWS Cloudformation stack via aws-cdk and pynamodb modules in Python.",
+            ),
+            (
+                "Collaboration",
+                "Team of 3 worked with Subversion in an agile environment to develop the cloud automation.",
+            ),
+            ("Tech Stack", "Python, AWS, AWS-CDK, Cloudformation, RDS, DynamoDB, Docker, Jenkins..."),
+        ],
     },
     {
         "company": "Ericsson Global India Pvt. Ltd.",
+        "company_logo": "Ericsson.png",
         "location": "Bangalore, India",
         "title": "Software Developer",
         "duration_start": date(2019, 1, 14),
         "duration_end": date(2021, 7, 26),
-        "description": """
-        - Surface Automation Framework: Worked on development of custom RPA framework that helped automate various network management tools. Automation gain with RPA framework reached 35% per month.
-        - Rule-based Data Analysis Engine: Developed rule-based recommendation and data analysis engine that calculates lists of high-impact network cells. The data analysis engine worked on large network data (10M rows and 5K cols, approx 30GB parquet file) on a daily basis for about 20 clients in less than 4 hours with a few parallel processing.
-        - Impact: With the rule-based recommendation & root cause analysis system automation gain reached 36% per month.
-        - Other projects: Integrated the custom RPA framework with existing automation platform. Also developed a system to fetch large amount of network data to local system via API, cleaned them and stored them as parquet files.
-        """,
+        "description": [
+            (
+                "Surface Automation Framework",
+                "Worked on development of custom RPA framework that helped automate various network management tools. Automation gain with RPA framework reached 35% per month.",
+            ),
+            (
+                "Rule-based Data Analysis Engine",
+                "Developed rule-based recommendation and data analysis engine that calculates lists of high-impact network cells. The data analysis engine worked on large network data (10M rows and 5K cols, approx 30GB parquet file) on a daily basis for about 20 clients in less than 4 hours with a few parallel processing.",
+            ),
+            (
+                "Impact",
+                "With the rule-based recommendation & root cause analysis system automation gain reached 36% per month.",
+            ),
+            (
+                "Other projects",
+                "Integrated the custom RPA framework with existing automation platform. Also developed a system to fetch large amount of network data to local system via API, cleaned them and stored them as parquet files.",
+            ),
+            (
+                "Tech Stack",
+                "Python, Selenium, Win32, OpenCV, MongoDB, Flask, Pandas, Numpy, Multithreading/processing, Matplotlib, MySQL, Parquet...",
+            ),
+        ],
+    },
+    {
+        "company": "Bharat Sanchar Nigam Ltd. (BSNL)",
+        "company_logo": "BSNL.png",
+        "location": "Suri, India",
+        "title": "Student Intern",
+        "duration_start": date(2018, 5, 14),
+        "duration_end": date(2018, 7, 20),
+        "description": [
+            (
+                "Learnings",
+                "Learned about network towers and how the base stations and cells work in them. Also learned about Optical Fibers in detail.",
+            ),
+            (
+                "Experiences",
+                "Had exposure to National Optical Fiber Network (NOFN) project, which was a nationwide optical fiber operation. Also learned about various network monitoring tools used in telecom companies.",
+            ),
+        ],
     },
 ]
 SKILLS = {
@@ -113,7 +192,7 @@ SKILLS = {
 PROJECTS = [
     {
         "title": "Portfolio Website",
-        "description": "This website is a portfolio website that I made using FastAPI and Vue.js.",
+        "description": "This website is a portfolio website that I made using FastAPI and basic HTML, CSS, Javascript.",
         "link": "https://asifiqbal.xyz",
     },
     {
