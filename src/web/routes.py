@@ -47,9 +47,21 @@ def arrange_interests(all_interests):
     return arranged_interests
 
 
-@app.get("/profile", name="profile", response_class=HTMLResponse)
-def read_profile(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.read_one_from_table(db, table_name="basic_info")
+@app.get("/", name="home", response_class=HTMLResponse)
+def send_home(request: Request, db: Session = Depends(get_db)):
+    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    user_filter = {"fk_user": basic_info.id}
+    skills = db_ops.filter_from_table(db, table_name="skills", filter=user_filter)
+    resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
+
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "basic_info": basic_info, "skills": arrange_skills(skills), "resume": resume}
+    )
+
+
+@app.get("/overview", name="overview", response_class=HTMLResponse)
+def send_overview(request: Request, db: Session = Depends(get_db)):
+    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
     user_filter = {"fk_user": basic_info.id}
 
     education = db_ops.filter_from_table(db, table_name="education", filter=user_filter)
@@ -63,7 +75,7 @@ def read_profile(request: Request, db: Session = Depends(get_db)):
     resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
 
     return templates.TemplateResponse(
-        "profile.html",
+        "overview.html",
         {
             "request": request,
             "curr_date": date.today(),
@@ -80,6 +92,70 @@ def read_profile(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/", name="home", response_class=HTMLResponse)
-def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/experience_education", name="experience_education", response_class=HTMLResponse)
+def send_experience_education(request: Request, db: Session = Depends(get_db)):
+    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    user_filter = {"fk_user": basic_info.id}
+
+    education = db_ops.filter_from_table(db, table_name="education", filter=user_filter)
+    experience = db_ops.filter_from_table(db, table_name="experience", filter=user_filter)
+
+    return templates.TemplateResponse(
+        "exp_edu.html",
+        {
+            "request": request,
+            "curr_date": date.today(),
+            "basic_info": basic_info,
+            "education": education,
+            "experience": experience,
+        },
+    )
+
+
+@app.get("/projects_certificates", name="projects_certificates", response_class=HTMLResponse)
+def send_projects_certificates(request: Request, db: Session = Depends(get_db)):
+    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    user_filter = {"fk_user": basic_info.id}
+
+    projects = db_ops.filter_from_table(db, table_name="projects", filter=user_filter)
+    certifications = db_ops.filter_from_table(db, table_name="certifications", filter=user_filter)
+
+    return templates.TemplateResponse(
+        "proj_cert.html",
+        {
+            "request": request,
+            "curr_date": date.today(),
+            "basic_info": basic_info,
+            "projects": projects,
+            "certifications": certifications,
+        },
+    )
+
+
+@app.get("/awards_interests", name="awards_interests", response_class=HTMLResponse)
+def send_awards_interests(request: Request, db: Session = Depends(get_db)):
+    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    user_filter = {"fk_user": basic_info.id}
+
+    honors_and_awards = db_ops.filter_from_table(db, table_name="honors_and_awards", filter=user_filter)
+    interests = db_ops.filter_from_table(db, table_name="interests", filter=user_filter)
+
+    return templates.TemplateResponse(
+        "awd_int.html",
+        {
+            "request": request,
+            "curr_date": date.today(),
+            "basic_info": basic_info,
+            "honors_and_awards": honors_and_awards,
+            "interests": arrange_interests(interests),
+        },
+    )
+
+
+@app.get("/resume", name="resume", response_class=HTMLResponse)
+def send_resume(request: Request, db: Session = Depends(get_db)):
+    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    user_filter = {"fk_user": basic_info.id}
+    resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
+
+    return templates.TemplateResponse("resume.html", {"request": request, "basic_info": basic_info, "resume": resume})
