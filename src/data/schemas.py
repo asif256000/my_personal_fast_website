@@ -5,10 +5,10 @@ from pydantic import BaseModel
 
 class BasicInfoBase(BaseModel):
     name: str
+    email: str
 
 
 class BasicInfoCreate(BasicInfoBase):
-    email: str
     phone: str | None = None
     location: str | None = None
     website: str | None = None
@@ -27,17 +27,19 @@ class BasicInfo(BasicInfoBase):
 class EducationBase(BaseModel):
     institution: str
     degree: str
+    duration_start: date
+    duration_end: date | None = None
+    major: str | None = None
 
 
 class EducationCreate(EducationBase):
     institution_logo: str | None = None
+    institution_link: str | None = None
     location: str | None = None
-    duration_start: date
-    duration_end: date | None = None
-    major: str | None = None
     minor: str | None = None
     gpa: str | None = None
     courses: str | None = None
+    important_links: dict | None = None
 
 
 class Education(EducationBase):
@@ -51,14 +53,17 @@ class Education(EducationBase):
 class ExperienceBase(BaseModel):
     company: str
     title: str
+    location: str | None = None
+    duration_start: date
+    duration_end: date | None = None
+    tech_stack: str | None = None
 
 
 class ExperienceCreate(ExperienceBase):
     company_logo: str | None = None
-    location: str | None = None
-    duration_start: date
-    duration_end: date | None = None
+    company_link: str | None = None
     description: list | None = None
+    important_links: dict | None = None
 
 
 class Experience(ExperienceBase):
@@ -106,12 +111,12 @@ class Projects(ProjectsBase):
 class CertificationsBase(BaseModel):
     title: str
     issuer: str
+    link: str | None = None
 
 
 class CertificationsCreate(CertificationsBase):
     description: str | None = None
     achievement_date: date | None = None
-    link: str | None = None
 
 
 class Certifications(CertificationsBase):
@@ -156,10 +161,11 @@ class Interests(InterestsBase):
 
 class ResumeBase(BaseModel):
     file_path: str
+    is_latest: bool
 
 
 class ResumeCreate(ResumeBase):
-    is_latest: bool
+    pass
 
 
 class Resume(ResumeBase):

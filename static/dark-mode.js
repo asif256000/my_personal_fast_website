@@ -3,7 +3,6 @@ const systemDarkMode =
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-// const darkModeToggle = document.querySelector("#dark-mode-toggle");
 const darkModeToggle = document.getElementById("dark-mode-toggle");
 const toggleText = document.getElementById("toggle-text");
 const body = document.body;
@@ -15,7 +14,9 @@ const enableDarkMode = () => {
   body.classList.add("dark-mode");
   // 2. Update darkMode in localStorage
   localStorage.setItem("darkMode", "enabled");
+  // 3. Make the toggle switch checked
   darkModeToggle.checked = true;
+  // 4. Update the toggle text
   toggleText.innerHTML = dark_mode_text;
 };
 
@@ -24,15 +25,18 @@ const disableDarkMode = () => {
   body.classList.remove("dark-mode");
   // 2. Update darkMode in localStorage
   localStorage.setItem("darkMode", "disabled");
+  // 3. Make the toggle switch unchecked
   darkModeToggle.checked = false;
+  // 4. Update the toggle text
   toggleText.innerHTML = light_mode_text;
 };
 
-// Check if user has a preferred color scheme and set initial mode accordingly
+// If the user already visited and enabled darkMode
 if (darkMode === "enabled") {
   enableDarkMode();
 } else if (darkMode === "disabled") {
   disableDarkMode();
+  // Check if user has a preferred color scheme
 } else if (systemDarkMode) {
   enableDarkMode();
 } else {
@@ -40,7 +44,6 @@ if (darkMode === "enabled") {
 }
 
 darkModeToggle.addEventListener("click", () => {
-  // get the current value of the "darkMode" item in the localStorage
   darkMode = localStorage.getItem("darkMode");
 
   if (darkMode === "enabled") {
@@ -49,13 +52,3 @@ darkModeToggle.addEventListener("click", () => {
     enableDarkMode();
   }
 });
-
-// Toggle dark mode on button click
-// darkModeToggle.addEventListener("change", () => {
-//   body.classList.toggle("dark-mode");
-//   if (body.classList.contains("dark-mode")) {
-//     toggleText.innerHTML = dark_mode_text;
-//   } else {
-//     toggleText.innerHTML = light_mode_text;
-//   }
-// });

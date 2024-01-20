@@ -1,5 +1,4 @@
 **.pyc
 .env
 *.db
-*.pdf
 .DS_Store

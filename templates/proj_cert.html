@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block heading %}
+    {{ basic_info.name.split(" ")[0] }}'s Profile
+{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+        <section id="projects">
+            <h2>Projects</h2>
+            <table>
+            <tbody>
+                {% for proj in projects %}
+                    <tr style="padding: 10px;">
+                    <td style="padding: 10px; max-width: 20vw;">{{ proj.title }}</td>
+                    <td style="padding: 10px; max-width: 50vw;"><p>{{ proj.description }}</p></td>
+                    <td style="padding: 10px; max-width: 30vw;">Link: <a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </section>
+        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <table>
+            <tbody>
+                {% for cert in certifications %}
+                    <tr style="padding: 10px;">
+                    <td style="padding: 10px; max-width: 20vw;"><b>{{ cert.title }}</b> issued by {{ cert.issuer }}</td>
+                    <td style="padding: 10px; max-width: 50vw;"><p>{{ cert.description }}</p></td>
+                    <td style="padding: 10px; max-width: 25vw;"><p><a href="{{ cert.link }}">Certificate</a> received on <b>{{ cert.achievement_date.strftime("%Y-%m-%d") }}</b></p></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </section>
+        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+    </div>
+{% endblock %}

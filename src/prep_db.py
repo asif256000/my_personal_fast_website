@@ -26,6 +26,7 @@ EDUCATIONS = [
     {
         "institution": "Virginia Tech",
         "institution_logo": "VirginiaTech.png",
+        "institution_link": "https://www.vt.edu/",
         "location": "Blacksburg, VA",
         "duration_start": date(2022, 8, 15),
         "duration_end": date(2024, 5, 20),
@@ -38,6 +39,7 @@ EDUCATIONS = [
     {
         "institution": "Vellore Institute of Technology (VIT), Vellore",
         "institution_logo": "VITVellore.png",
+        "institution_link": "https://www.vit.ac.in/",
         "location": "Vellore, India",
         "duration_start": date(2015, 7, 11),
         "duration_end": date(2019, 5, 22),
@@ -50,6 +52,7 @@ EDUCATIONS = [
     {
         "institution": "Ramakrishna Mission Vidyalaya, Narendrapur",
         "institution_logo": "RKMVNDP.png",
+        "institution_link": "https://www.rkmvnarendrapur.org/",
         "location": "Kolkata, India",
         "duration_start": date(2007, 4, 26),
         "duration_end": date(2015, 4, 15),
@@ -63,6 +66,7 @@ EXPERIENCES = [
     {
         "company": "Virginia Tech - Department of Computational Cell Biology",
         "company_logo": "VirginiaTech.png",
+        "company_link": "https://mpf.biol.vt.edu/lab_website/",
         "location": "Blacksburg, VA",
         "title": "Student Data Analyst",
         "duration_start": date(2022, 10, 10),
@@ -77,15 +81,14 @@ EXPERIENCES = [
                 "Future plans",
                 "Implementing a better scoring mechanism, optimizing the method to run larger models, and applying the method on models of cancerous cells to identify potential drug targets.",
             ),
-            (
-                "Tech Stack",
-                "Python, Pandas, Multiprocessing, DataClass, PyTest, Logger, Matplotlib, High Performance Computing...",
-            ),
         ],
+        "important_links": {"Preprint": "https://www.biorxiv.org/content/10.1101/2023.10.30.564745v1"},
+        "tech_stack": "Python, Pandas, Multiprocessing, DataClass, PyTest, Logger, Matplotlib, High Performance Computing...",
     },
     {
         "company": "Seclore Technology Pvt. Ltd.",
         "company_logo": "Seclore.png",
+        "company_link": "https://www.seclore.com/",
         "location": "Mumbai, India",
         "title": "Product Engineer",
         "duration_start": date(2021, 12, 6),
@@ -103,12 +106,13 @@ EXPERIENCES = [
                 "Collaboration",
                 "Team of 3 worked with Subversion in an agile environment to develop the cloud automation.",
             ),
-            ("Tech Stack", "Python, AWS, AWS-CDK, Cloudformation, RDS, DynamoDB, Docker, Jenkins..."),
         ],
+        "tech_stack": "Python, AWS, AWS-CDK, Cloudformation, RDS, DynamoDB, Docker, Jenkins...",
     },
     {
         "company": "Ericsson Global India Pvt. Ltd.",
         "company_logo": "Ericsson.png",
+        "company_link": "https://www.ericsson.com/en",
         "location": "Bangalore, India",
         "title": "Software Developer",
         "duration_start": date(2019, 1, 14),
@@ -130,15 +134,13 @@ EXPERIENCES = [
                 "Other projects",
                 "Integrated the custom RPA framework with existing automation platform. Also developed a system to fetch large amount of network data to local system via API, cleaned them and stored them as parquet files.",
             ),
-            (
-                "Tech Stack",
-                "Python, Selenium, Win32, OpenCV, MongoDB, Flask, Pandas, Numpy, Multithreading/processing, Matplotlib, MySQL, Parquet...",
-            ),
         ],
+        "tech_stack": "Python, Selenium, Win32, OpenCV, MongoDB, Flask, Pandas, Numpy, Multithreading/processing, Matplotlib, MySQL, Parquet...",
     },
     {
         "company": "Bharat Sanchar Nigam Ltd. (BSNL)",
         "company_logo": "BSNL.png",
+        "company_link": "https://www.bsnl.co.in/",
         "location": "Suri, India",
         "title": "Student Intern",
         "duration_start": date(2018, 5, 14),
@@ -247,7 +249,7 @@ INTERESTS = {
     "Other Hobbies": ["Leisure Reading", "Photography", "Soccer", "Table Tennis"],
 }
 RESUME_DATA = {
-    "file_path": "Asif's Resume.pdf",
+    "file_path": "Resume_Asif.pdf",
     "is_latest": True,
 }
 

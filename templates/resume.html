@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block heading %}
+    {{ basic_info.name.split(" ")[0] }}'s Profile
+{% endblock %}
+
+{% block content %}
+    <div class="main-content">
+            <section id="resume">
+            <h2>Resume</h2>
+            {% set resume_path = resume[0].file_path %}
+            <a href="{{ url_for('static', path=resume_path) }}" download class="download-link">Resume</a>
+            <br>
+            <object data="{{ url_for('static', path= resume_path ) }}" type="application/pdf" style="width: 70vw; height: 1000px;">
+                <embed src="{{ url_for('static', path= resume_path ) }}" type="application/pdf">
+            </object>
+        </section>
+        <hr style="max-width: 70vw; margin-left: 0; opacity: 0.5;">
+    </div>
+{% endblock %}
