@@ -1,3 +1,4 @@
+/* Common style for the website */
 body {
   min-height: 100vh;
   display: flex;
@@ -34,20 +35,9 @@ p {
   font-size: large;
 }
 
-.dark-mode h1,
-.dark-mode h2,
-.dark-mode h3,
-.dark-mode h4 {
-  color: #fff;
-}
-
 #wrapper {
   flex: 1;
   transition: margin-left 0.3s ease;
-}
-
-#wrapper.open {
-  margin-left: 250px;
 }
 
 .post {
@@ -90,8 +80,16 @@ p {
   height: 100%;
 }
 
-body.dark-mode a {
-  color: rgb(178, 178, 178);
+/* Dark mode styles */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4 {
+  color: #fff;
+}
+
+.dark-mode a {
+  color: #909090;
 }
 
 .dark-mode {
@@ -100,11 +98,26 @@ body.dark-mode a {
 }
 
 .dark-mode footer {
-  background-color: #555;
+  background-color: #444;
   color: #fff;
   padding: 10px;
 }
 
+.dark-mode nav ul li a {
+  background-color: #555;
+  color: #fff;
+}
+
+.dark-mode .download-link {
+  background-color: #ddd;
+  color: #000;
+}
+
+.dark-mode .download-link:hover {
+  background-color: #aaa;
+}
+
+/* Dark Mode Toggle styles */
 .dark-mode-toggle {
   position: fixed;
   top: 20px;
@@ -158,29 +171,87 @@ label {
   transition: opacity 0.5s ease;
 }
 
-#sidebar {
-  width: 250px;
-  height: 100%;
-  position: fixed;
-  left: -250px;
-  transition: left 0.3s ease;
+/* Download Button styles */
+.download-link {
+  display: inline-block;
+  width: 70vw;
+  padding: 5px 0px;
+  text-align: center;
+  background-color: #222;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-#sidebar.open {
-  left: 0;
+.download-link:hover {
+  background-color: #444;
 }
 
-#sidebar-toggle {
-  position: fixed;
-  left: 10px;
-  top: 10px;
+.download-link::before {
+  content: "⬇ Download ";
 }
 
+/* Image and image link styles */
 .image-link {
   display: inline-block;
 }
 
-.my-image {
+/* .my-image {
   max-height: 500px;
   object-fit: cover;
+} */
+
+/* Navigation Bar styles */
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  flex-grow: 1;
+}
+nav ul li a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+}
+
+nav ul li a {
+  background-color: #666;
+  color: #fff;
+}
+
+nav ul li a:hover {
+  background-color: #444;
+}
+
+/* Scroll to top and bottom buttons */
+#scroll-to-top,
+#scroll-to-bottom {
+  position: fixed;
+  right: 10px;
+  padding: 10px;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  opacity: 0.1;
+  transition: opacity 1s;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 20px;
+}
+
+#scroll-to-top {
+  top: 20vh;
+}
+
+#scroll-to-bottom {
+  bottom: 10vh;
 }
