@@ -10,17 +10,17 @@
         <table>
         <tr>
         <td style="padding: 10px; width: 20vw;">
-            <a target="_self" href="{{ url_for('overview') }}" class="image-link">
-                <img src="{{ url_for('static', path='image.jpg') }}" alt="{{ basic_info.name }}">
+            <a target="_self" href="{{ request.url_for('overview') }}" class="image-link">
+                <img src="{{ request.url_for('static', path='image.jpg') }}" alt="{{ basic_info.name }}">
             </a>
         </td>
         <td style="padding: 10px;"><p>Hi there, I am {{ basic_info.name}}, currently living in {{ basic_info.location }}.
             You can email me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or call/ text at <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a>.
-            Thank you for visiting <a href="{{ url_for('home') }}">my website</a>, but don't forget to check out my <a href="{{ basic_info.github }}">GitHub</a> 
+            Thank you for visiting <a href="{{ request.url_for('home') }}">my website</a>, but don't forget to check out my <a href="{{ basic_info.github }}">GitHub</a> 
             and <a href="{{ basic_info.linkedin }}">LinkedIn</a> profiles.
             <br><br>
             Feel free to navigate to other pages in my profile to learn more about me. 
-            Or if you do not have enough time, you can go to the <a href="{{ url_for('overview') }}">overview page</a> to see a summary of my profile.
+            Or if you do not have enough time, you can go to the <a href="{{ request.url_for('overview') }}">overview page</a> to see a summary of my profile.
             <br><br>
             {{ basic_info.intro|safe }}
             </p></td>
@@ -59,10 +59,10 @@
         <section id="resume">
             <h2>Resume</h2>
             {% set resume_path = resume[0].file_path %}
-            <a href="{{ url_for('static', path=resume_path) }}" download class="download-link">Resume</a>
+            <a href="{{ request.url_for('static', path=resume_path) }}" download class="download-link">Resume</a>
             <br>
-            <object data="{{ url_for('static', path= resume_path ) }}" type="application/pdf" style="width: 70vw; height: 1000px;">
-                <embed src="{{ url_for('static', path= resume_path ) }}" type="application/pdf">
+            <object data="{{ request.url_for('static', path= resume_path ) }}" type="application/pdf" style="width: 70vw; height: 1000px;">
+                <embed src="{{ request.url_for('static', path= resume_path ) }}" type="application/pdf">
             </object>
         </section>
         <hr style="max-width: 70vw; margin-left: 0; opacity: 0.5;">

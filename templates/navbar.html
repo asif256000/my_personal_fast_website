@@ -1,10 +1,10 @@
 <nav>
     <ul>
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('overview') }}">Overview</a></li>
-        <li><a href="{{ url_for('experience_education') }}">Experience & Education</a></li>
-        <li><a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a></li>
-        <li><a href="{{ url_for('awards_interests') }}">Awards & Interests</a></li>
-        <li><a href="{{ url_for('resume') }}">Resume</a></li>
+        <li><a href="{{ request.url_for('home') }}">Home</a></li>
+        <li><a href="{{ request.url_for('overview') }}">Overview</a></li>
+        <li><a href="{{ request.url_for('experience_education') }}">Experience & Education</a></li>
+        <li><a href="{{ request.url_for('projects_certificates') }}">Projects & Certifications</a></li>
+        <li><a href="{{ request.url_for('awards_interests') }}">Awards & Interests</a></li>
+        <li><a href="{{ request.url_for('resume') }}">Resume</a></li>
     </ul>
 </nav>
