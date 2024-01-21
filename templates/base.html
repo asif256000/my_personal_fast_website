@@ -3,11 +3,11 @@
 
 <head>
     <title>{% block title %}Profile{% endblock %}</title>
-    <link href="{{ request.url_for('static', path='/logos/profile_logo.ico') }}" rel="icon">
-    <link href="{{ request.url_for('static', path='/style.css') }}" rel="stylesheet">
-    <script src="{{ request.url_for('static', path='/dark-mode.js') }}" defer></script>
-    <script src="{{ request.url_for('static', path='/scroll-functions.js') }}"></script>
-    <script src="{{ request.url_for('static', path='/other-actions.js') }}"></script>
+    <link href="{{ url_for('static', path='/logos/profile_logo.ico') }}" rel="icon">
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='/dark-mode.js') }}" defer></script>
+    <script src="{{ url_for('static', path='/scroll-functions.js') }}"></script>
+    <script src="{{ url_for('static', path='/other-actions.js') }}"></script>
 </head>
 
 <body>
@@ -27,8 +27,8 @@
         {# <div class="content"> #}
             <h1>
             <div style="display: inline-block; vertical-align: middle;">
-                <a href="{{ request.url_for('home') }}">
-                    <img src="{{ request.url_for('static', path='logos/profile_logo.png') }}" alt="Logo" style="width: 50px;">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', path='logos/profile_logo.png') }}" alt="Logo" style="width: 50px;">
                 </a>
             </div>
             <div style="display: inline-block; vertical-align: middle;">

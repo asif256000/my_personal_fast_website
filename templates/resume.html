@@ -9,10 +9,10 @@
             <section id="resume">
             <h2>Resume</h2>
             {% set resume_path = resume[0].file_path %}
-            <a href="{{ request.url_for('static', path=resume_path) }}" download class="download-link">Resume</a>
+            <a href="{{ url_for('static', path=resume_path) }}" download class="download-link">Resume</a>
             <br>
-            <object data="{{ request.url_for('static', path= resume_path ) }}" type="application/pdf" style="width: 70vw; height: 1000px;">
-                <embed src="{{ request.url_for('static', path= resume_path ) }}" type="application/pdf">
+            <object data="{{ url_for('static', path= resume_path ) }}" type="application/pdf" style="width: 70vw; height: 1000px;">
+                <embed src="{{ url_for('static', path= resume_path ) }}" type="application/pdf">
             </object>
         </section>
         <hr style="max-width: 70vw; margin-left: 0; opacity: 0.5;">
