@@ -107,6 +107,10 @@ p {
   background-color: #555;
   color: #fff;
 }
+.dark-mode nav ul li a.active {
+  border: 2px solid #333;
+  box-shadow: 0 0 10px #fff;
+}
 
 .dark-mode .download-link {
   background-color: #ddd;
@@ -227,6 +231,13 @@ nav ul li a {
 
 nav ul li a:hover {
   background-color: #444;
+}
+
+nav ul li a.active {
+  background-color: #444;
+  font-weight: bold;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px #000;
 }
 
 /* Scroll to top and bottom buttons */
