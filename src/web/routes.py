@@ -55,7 +55,14 @@ def send_home(request: Request, db: Session = Depends(get_db)):
     resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
 
     return templates.TemplateResponse(
-        "index.html", {"request": request, "basic_info": basic_info, "skills": arrange_skills(skills), "resume": resume}
+        "index.html",
+        {
+            "request": request,
+            "current_page": "home",
+            "basic_info": basic_info,
+            "skills": arrange_skills(skills),
+            "resume": resume,
+        },
     )
 
 
@@ -78,6 +85,7 @@ def send_overview(request: Request, db: Session = Depends(get_db)):
         "overview.html",
         {
             "request": request,
+            "current_page": "overview",
             "curr_date": date.today(),
             "basic_info": basic_info,
             "education": education,
@@ -104,6 +112,7 @@ def send_experience_education(request: Request, db: Session = Depends(get_db)):
         "exp_edu.html",
         {
             "request": request,
+            "current_page": "experience_education",
             "curr_date": date.today(),
             "basic_info": basic_info,
             "education": education,
@@ -124,6 +133,7 @@ def send_projects_certificates(request: Request, db: Session = Depends(get_db)):
         "proj_cert.html",
         {
             "request": request,
+            "current_page": "projects_certificates",
             "curr_date": date.today(),
             "basic_info": basic_info,
             "projects": projects,
@@ -144,6 +154,7 @@ def send_awards_interests(request: Request, db: Session = Depends(get_db)):
         "awd_int.html",
         {
             "request": request,
+            "current_page": "awards_interests",
             "curr_date": date.today(),
             "basic_info": basic_info,
             "honors_and_awards": honors_and_awards,
@@ -158,4 +169,6 @@ def send_resume(request: Request, db: Session = Depends(get_db)):
     user_filter = {"fk_user": basic_info.id}
     resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
 
-    return templates.TemplateResponse("resume.html", {"request": request, "basic_info": basic_info, "resume": resume})
+    return templates.TemplateResponse(
+        "resume.html", {"request": request, "current_page": "resume", "basic_info": basic_info, "resume": resume}
+    )
