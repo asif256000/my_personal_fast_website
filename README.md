@@ -1,6 +1,6 @@
 # My Personal Website
 
-Welcome to my personal website! This website serves as a showcase of my skills and projects.
+Welcome to my personal website! This website serves as a showcase of my skills and projects. This website is currently hosted on [AWS](https://aws.amazon.com/) using [ECS](https://aws.amazon.com/ecs/) at [asifiqbal.xyz](https://asifiqbal.xyz/).
 
 ## Tech Stack
 
