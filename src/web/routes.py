@@ -1,25 +1,31 @@
+from contextlib import contextmanager
 from datetime import date
 
-from fastapi import Depends, FastAPI, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from src.data import db_init, db_ops, models, schemas
-from src.main import app
+from src.data import db_init, db_ops, models
 
 models.Base.metadata.create_all(bind=db_init.engine)
-templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 def get_db():
+    db = None
     try:
         db = db_init.SessionLocal()
         yield db
+    except SQLAlchemyError as e:
+        print(f"Database error: {e}")
     finally:
-        db.close()
+        if db is not None:
+            db.close()
+
+
+router = APIRouter()
+templates = Jinja2Templates(directory="templates")
 
 
 def arrange_skills(all_skills):
@@ -47,12 +53,12 @@ def arrange_interests(all_interests):
     return arranged_interests
 
 
-@app.get("/", name="home", response_class=HTMLResponse)
+@router.get("/", name="home", response_class=HTMLResponse)
 def send_home(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
-    skills = db_ops.filter_from_table(db, table_name="skills", filter=user_filter)
-    resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
+    skills = db_ops.filter_data_from_table(db, table_name="skills", lookup_filter=user_filter)
+    resume = db_ops.filter_data_from_table(db, table_name="resume", lookup_filter=user_filter | {"is_latest": 1})
 
     return templates.TemplateResponse(
         "index.html",
@@ -66,20 +72,20 @@ def send_home(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/overview", name="overview", response_class=HTMLResponse)
+@router.get("/overview", name="overview", response_class=HTMLResponse)
 def send_overview(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
-    education = db_ops.filter_from_table(db, table_name="education", filter=user_filter)
-    experience = db_ops.filter_from_table(db, table_name="experience", filter=user_filter)
+    education = db_ops.filter_data_from_table(db, table_name="education", lookup_filter=user_filter)
+    experience = db_ops.filter_data_from_table(db, table_name="experience", lookup_filter=user_filter)
 
-    skills = db_ops.filter_from_table(db, table_name="skills", filter=user_filter)
-    projects = db_ops.filter_from_table(db, table_name="projects", filter=user_filter)
-    certifications = db_ops.filter_from_table(db, table_name="certifications", filter=user_filter)
-    honors_and_awards = db_ops.filter_from_table(db, table_name="honors_and_awards", filter=user_filter)
-    interests = db_ops.filter_from_table(db, table_name="interests", filter=user_filter)
-    resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
+    skills = db_ops.filter_data_from_table(db, table_name="skills", lookup_filter=user_filter)
+    projects = db_ops.filter_data_from_table(db, table_name="projects", lookup_filter=user_filter)
+    certifications = db_ops.filter_data_from_table(db, table_name="certifications", lookup_filter=user_filter)
+    honors_and_awards = db_ops.filter_data_from_table(db, table_name="honors_and_awards", lookup_filter=user_filter)
+    interests = db_ops.filter_data_from_table(db, table_name="interests", lookup_filter=user_filter)
+    resume = db_ops.filter_data_from_table(db, table_name="resume", lookup_filter=user_filter | {"is_latest": 1})
 
     return templates.TemplateResponse(
         "overview.html",
@@ -100,13 +106,13 @@ def send_overview(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/experience_education", name="experience_education", response_class=HTMLResponse)
+@router.get("/experience_education", name="experience_education", response_class=HTMLResponse)
 def send_experience_education(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
-    education = db_ops.filter_from_table(db, table_name="education", filter=user_filter)
-    experience = db_ops.filter_from_table(db, table_name="experience", filter=user_filter)
+    education = db_ops.filter_data_from_table(db, table_name="education", lookup_filter=user_filter)
+    experience = db_ops.filter_data_from_table(db, table_name="experience", lookup_filter=user_filter)
 
     return templates.TemplateResponse(
         "exp_edu.html",
@@ -121,13 +127,13 @@ def send_experience_education(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/projects_certificates", name="projects_certificates", response_class=HTMLResponse)
+@router.get("/projects_certificates", name="projects_certificates", response_class=HTMLResponse)
 def send_projects_certificates(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
-    projects = db_ops.filter_from_table(db, table_name="projects", filter=user_filter)
-    certifications = db_ops.filter_from_table(db, table_name="certifications", filter=user_filter)
+    projects = db_ops.filter_data_from_table(db, table_name="projects", lookup_filter=user_filter)
+    certifications = db_ops.filter_data_from_table(db, table_name="certifications", lookup_filter=user_filter)
 
     return templates.TemplateResponse(
         "proj_cert.html",
@@ -142,13 +148,13 @@ def send_projects_certificates(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/awards_interests", name="awards_interests", response_class=HTMLResponse)
+@router.get("/awards_interests", name="awards_interests", response_class=HTMLResponse)
 def send_awards_interests(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
-    honors_and_awards = db_ops.filter_from_table(db, table_name="honors_and_awards", filter=user_filter)
-    interests = db_ops.filter_from_table(db, table_name="interests", filter=user_filter)
+    honors_and_awards = db_ops.filter_data_from_table(db, table_name="honors_and_awards", lookup_filter=user_filter)
+    interests = db_ops.filter_data_from_table(db, table_name="interests", lookup_filter=user_filter)
 
     return templates.TemplateResponse(
         "awd_int.html",
@@ -163,11 +169,11 @@ def send_awards_interests(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@app.get("/resume", name="resume", response_class=HTMLResponse)
+@router.get("/resume", name="resume", response_class=HTMLResponse)
 def send_resume(request: Request, db: Session = Depends(get_db)):
-    basic_info = db_ops.filter_from_table_with_id(db, table_name="basic_info", id=1)
+    basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
-    resume = db_ops.filter_from_table(db, table_name="resume", filter=user_filter | {"is_latest": 1})
+    resume = db_ops.filter_data_from_table(db, table_name="resume", lookup_filter=user_filter | {"is_latest": 1})
 
     return templates.TemplateResponse(
         "resume.html", {"request": request, "current_page": "resume", "basic_info": basic_info, "resume": resume}

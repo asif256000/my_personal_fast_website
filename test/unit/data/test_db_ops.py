@@ -3,6 +3,7 @@ from datetime import date
 import pytest
 from pydantic import BaseModel
 from sqlalchemy import create_engine
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -105,29 +106,51 @@ def test_add_data_to_table(db: Session, table_name: str, input_data: dict):
         assert getattr(added_data, key) == value
 
 
+def test_add_data_to_table_invalid(db: Session):
+    # Because of the unique constraint on the email and phone field, adding the same data again should raise an error
+    with pytest.raises(IntegrityError):
+        db_ops.add_data_to_table(db, tables_and_inputs[0][0], tables_and_inputs[0][1])
+
+
 @pytest.mark.parametrize("table_name,input_data", tables_and_inputs)
-def test_read_from_table(db: Session, table_name: str, input_data: dict):
-    read_data = db_ops.read_from_table(db, table_name)
+def test_read_data_from_table(db: Session, table_name: str, input_data: dict):
+    read_data = db_ops.read_data_from_table(db, table_name)
     # Verify that the data was added correctly
     for key, value in input_data.items():
         assert getattr(read_data[0], key) == value
 
 
 @pytest.mark.parametrize("table_name,input_data", tables_and_inputs)
-def test_filter_from_table(db: Session, table_name: str, input_data: dict):
+def test_read_single_data(db: Session, table_name: str, input_data: dict):
+    read_data = db_ops.read_single_data(db, table_name)
+    # Verify that the data was added correctly
+    for key, value in input_data.items():
+        assert getattr(read_data, key) == value
+
+
+@pytest.mark.parametrize("table_name,input_data", tables_and_inputs)
+def test_filter_data_with_id(db: Session, table_name: str, input_data: dict):
+    filtered_data = db_ops.filter_data_with_id(db, table_name, 1)
+    # Verify that the data was added correctly
+    for key, value in input_data.items():
+        assert getattr(filtered_data, key) == value
+
+
+@pytest.mark.parametrize("table_name,input_data", tables_and_inputs)
+def test_filter_data_from_table(db: Session, table_name: str, input_data: dict):
     single_key = list(input_data.keys())[0]
-    filtered_data = db_ops.filter_from_table(db, table_name, {single_key: input_data[single_key]})
+    filtered_data = db_ops.filter_data_from_table(db, table_name, {single_key: input_data[single_key]})
     # Verify that the data was added correctly
     for key, value in input_data.items():
         assert getattr(filtered_data[0], key) == value
 
 
 @pytest.mark.parametrize("table_name,input_data", tables_and_inputs)
-def test_update_data_in_table(db: Session, table_name: str, input_data: dict):
+def test_update_data_with_id(db: Session, table_name: str, input_data: dict):
     single_key = list(input_data.keys())[0]
-    updated_data = db_ops.update_data_in_table(db, table_name, 1, {single_key: "Updated"})
+    updated_data = db_ops.update_data_with_id(db, table_name, 1, {single_key: "Updated"})
     assert getattr(updated_data, single_key) == "Updated"
 
 
-def test_snake_to_camel_case():
-    assert db_ops.snake_to_camel_case("hello_world") == "HelloWorld"
+def test_snake_to_pascal_case():
+    assert db_ops.snake_to_pascal_case("hello_world") == "HelloWorld"
