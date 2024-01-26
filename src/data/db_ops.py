@@ -1,7 +1,7 @@
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm import Session
 
-from src.data import models, schemas
+from . import models, schemas
 
 
 def snake_to_pascal_case(string: str):

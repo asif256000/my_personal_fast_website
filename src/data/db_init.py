@@ -3,6 +3,7 @@ import os
 import databases
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -16,3 +17,15 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 Base = declarative_base()
+
+
+def get_db():
+    db = None
+    try:
+        db = SessionLocal()
+        yield db
+    except SQLAlchemyError as e:
+        print(f"Database error: {e}")
+    finally:
+        if db is not None:
+            db.close()

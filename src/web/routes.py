@@ -1,27 +1,13 @@
-from contextlib import contextmanager
 from datetime import date
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from src.data import db_init, db_ops, models
 
 models.Base.metadata.create_all(bind=db_init.engine)
-
-
-def get_db():
-    db = None
-    try:
-        db = db_init.SessionLocal()
-        yield db
-    except SQLAlchemyError as e:
-        print(f"Database error: {e}")
-    finally:
-        if db is not None:
-            db.close()
 
 
 router = APIRouter()
@@ -54,7 +40,7 @@ def arrange_interests(all_interests):
 
 
 @router.get("/", name="home", response_class=HTMLResponse)
-def send_home(request: Request, db: Session = Depends(get_db)):
+def send_home(request: Request, db: Session = Depends(db_init.get_db)):
     basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
     skills = db_ops.filter_data_from_table(db, table_name="skills", lookup_filter=user_filter)
@@ -73,7 +59,7 @@ def send_home(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/overview", name="overview", response_class=HTMLResponse)
-def send_overview(request: Request, db: Session = Depends(get_db)):
+def send_overview(request: Request, db: Session = Depends(db_init.get_db)):
     basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
@@ -107,7 +93,7 @@ def send_overview(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/experience_education", name="experience_education", response_class=HTMLResponse)
-def send_experience_education(request: Request, db: Session = Depends(get_db)):
+def send_experience_education(request: Request, db: Session = Depends(db_init.get_db)):
     basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
@@ -128,7 +114,7 @@ def send_experience_education(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/projects_certificates", name="projects_certificates", response_class=HTMLResponse)
-def send_projects_certificates(request: Request, db: Session = Depends(get_db)):
+def send_projects_certificates(request: Request, db: Session = Depends(db_init.get_db)):
     basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
@@ -149,7 +135,7 @@ def send_projects_certificates(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/awards_interests", name="awards_interests", response_class=HTMLResponse)
-def send_awards_interests(request: Request, db: Session = Depends(get_db)):
+def send_awards_interests(request: Request, db: Session = Depends(db_init.get_db)):
     basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
 
@@ -170,7 +156,7 @@ def send_awards_interests(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/resume", name="resume", response_class=HTMLResponse)
-def send_resume(request: Request, db: Session = Depends(get_db)):
+def send_resume(request: Request, db: Session = Depends(db_init.get_db)):
     basic_info = db_ops.filter_data_with_id(db, table_name="basic_info", lookup_id=1)
     user_filter = {"fk_user": basic_info.id}
     resume = db_ops.filter_data_from_table(db, table_name="resume", lookup_filter=user_filter | {"is_latest": 1})
