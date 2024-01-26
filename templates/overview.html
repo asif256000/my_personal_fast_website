@@ -35,7 +35,6 @@
                             {% for title, link in exp.important_links.items() %}
                                 <b>{{ title }}: </b><a href="{{ link }}">{{ link }}</a><br>
                             {% endfor %}
-                        <br>
                         {% endif %}
                         {{ "Tech stack used: " + exp.tech_stack if exp.tech_stack else "" }}
                         </p>
