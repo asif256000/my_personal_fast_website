@@ -1,7 +1,9 @@
 from sqlalchemy import JSON, Boolean, Column, Date, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .db_init import Base
+from .db_init import Base  # , SECRET_KEY
+
+# from sqlalchemy_utils import EncryptedType
 
 
 class BasicInfo(Base):
@@ -10,6 +12,7 @@ class BasicInfo(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     email = Column(String, unique=True)
+    # email = Column(EncryptedType(String, SECRET_KEY), unique=True)
     phone = Column(String, unique=True)
     location = Column(String)
     website = Column(String)
