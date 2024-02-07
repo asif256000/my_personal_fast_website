@@ -4,6 +4,15 @@ from data import db_ops
 from data.db_init import get_db
 
 
+def manual_add_db_entries():
+    db = next(get_db())
+    table = "skills"
+    data = {}
+    print(f"Adding data for {table=} with {data=}")
+    db_ops.add_data_to_table(db, table_name=table, data=data)
+    db.close()
+
+
 def manual_update_db_entries():
     db = next(get_db())
     table = "experience"
@@ -75,5 +84,6 @@ def manual_read_db_entries():
 
 
 if __name__ == "__main__":
-    manual_update_db_entries()
+    # manual_add_db_entries()
+    # manual_update_db_entries()
     manual_read_db_entries()
