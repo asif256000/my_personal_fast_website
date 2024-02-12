@@ -15,27 +15,30 @@ def manual_add_db_entries():
 
 def manual_update_db_entries():
     db = next(get_db())
-    table = "experience"
-    # filter_data = {"institution": "Virginia Tech", "fk_user": 1}
+    table = "projects"
     updated_data = {}
+    # filter_data = {"title": "EEG-to-Text with Sentiment Analysis", "fk_user": 1}
+    # filtered_data = db_ops.filter_data_from_table(db, table, lookup_filter=filter_data)[0]
     filtered_data = db_ops.filter_data_with_id(db, table, lookup_id=1)
     print(f"Updating data for {table=} for id={filtered_data.id}. {updated_data=}")
     db_ops.update_data_with_id(db, table_name=table, lookup_id=filtered_data.id, data=updated_data)
     db.close()
 
     db = next(get_db())
-    table = "experience"
-    # filter_data = {"institution": "Vellore Institute of Technology (VIT), Vellore", "fk_user": 1}
+    table = "projects"
     updated_data = {}
+    # filter_data = {"title": "Multi-Object Tracking using GAN with FairMOT", "fk_user": 1}
+    # filtered_data = db_ops.filter_data_from_table(db, table, lookup_filter=filter_data)[0]
     filtered_data = db_ops.filter_data_with_id(db, table, lookup_id=2)
     print(f"Updating data for {table=} for id={filtered_data.id}. {updated_data=}")
     db_ops.update_data_with_id(db, table_name=table, lookup_id=filtered_data.id, data=updated_data)
     db.close()
 
     db = next(get_db())
-    table = "experience"
-    # filter_data = {"institution": "Vellore Institute of Technology (VIT), Vellore", "fk_user": 1}
+    table = "projects"
     updated_data = {}
+    # filter_data = {"title": "Portfolio Website", "fk_user": 1}
+    # filtered_data = db_ops.filter_data_from_table(db, table, lookup_filter=filter_data)[0]
     filtered_data = db_ops.filter_data_with_id(db, table, lookup_id=3)
     print(f"Updating data for {table=} for id={filtered_data.id}. {updated_data=}")
     db_ops.update_data_with_id(db, table_name=table, lookup_id=filtered_data.id, data=updated_data)
