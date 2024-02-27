@@ -110,7 +110,11 @@
                     {% for proj in projects %}
                         <tr>
                             <td style="padding: 5px;">{{ proj.title }}</td>
-                            <td style="padding: 5px;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                            {% if proj.link %}
+                                <td style="padding: 5px;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                            {% else %}
+                                <td style="padding: 5px;"></td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -124,8 +128,12 @@
             <tbody>
                 {% for cert in certifications %}
                     <tr style="padding: 2px;">
-                    <td style="padding: 2px; max-width: 55vw;"><b>{{ cert.title }}</b> issued by {{ cert.issuer }}</td>
-                    <td style="padding: 2px; max-width: 35vw;"><p><a href="{{ cert.link }}">Certificate</a> received on <b>{{ cert.achievement_date.strftime("%Y-%b") }}</b></p></td>
+                    <td style="padding: 2px; max-width: 55vw;"><b>{{ cert.title }}</b> by {{ cert.issuer }}</td>
+                    {% if cert.link %}
+                        <td style="padding: 2px; max-width: 35vw;"><p><a href="{{ cert.link }}">Certificate</a> received on <b>{{ cert.achievement_date.strftime("%Y-%b") }}</b></p></td>
+                    {% else %}
+                        <td style="padding: 2px; max-width: 35vw;"></td>
+                    {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>
