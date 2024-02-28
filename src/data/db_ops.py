@@ -41,7 +41,6 @@ def add_data_to_table(db: Session, table_name: str, data: dict):
 
 
 def delete_data_by_id(db: Session, table_name: str, lookup_id: int):
-    model_class = get_model_class_from_table_name(table_name)
     record = filter_data_with_id(db, table_name, lookup_id)
 
     if record:
