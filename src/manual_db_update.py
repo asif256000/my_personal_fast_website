@@ -45,6 +45,16 @@ def manual_update_db_entries():
     db.close()
 
 
+def manual_delete_db_entries():
+    table = ""
+    id_list = []
+    for id in id_list:
+        db = next(get_db())
+        deleted_record = db_ops.delete_data_by_id(db=db, table_name=table, lookup_id=id)
+        print(f"Deleted {deleted_record}")
+        db.close()
+
+
 def manual_read_db_entries():
     db = next(get_db())
     table_name = "basic_info"
@@ -89,4 +99,5 @@ def manual_read_db_entries():
 if __name__ == "__main__":
     # manual_add_db_entries()
     # manual_update_db_entries()
+    # manual_delete_db_entries()
     manual_read_db_entries()
