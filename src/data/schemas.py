@@ -30,6 +30,7 @@ class EducationBase(BaseModel):
     duration_start: date
     duration_end: date | None = None
     major: str | None = None
+    fk_user: int
 
 
 class EducationCreate(EducationBase):
@@ -44,7 +45,6 @@ class EducationCreate(EducationBase):
 
 class Education(EducationBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -57,6 +57,7 @@ class ExperienceBase(BaseModel):
     duration_start: date
     duration_end: date | None = None
     tech_stack: str | None = None
+    fk_user: int
 
 
 class ExperienceCreate(ExperienceBase):
@@ -68,7 +69,6 @@ class ExperienceCreate(ExperienceBase):
 
 class Experience(ExperienceBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -76,6 +76,7 @@ class Experience(ExperienceBase):
 
 class SkillsBase(BaseModel):
     skill: str
+    fk_user: int
 
 
 class SkillsCreate(SkillsBase):
@@ -85,7 +86,6 @@ class SkillsCreate(SkillsBase):
 
 class Skills(SkillsBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -93,6 +93,7 @@ class Skills(SkillsBase):
 
 class ProjectsBase(BaseModel):
     title: str
+    fk_user: int
 
 
 class ProjectsCreate(ProjectsBase):
@@ -102,7 +103,6 @@ class ProjectsCreate(ProjectsBase):
 
 class Projects(ProjectsBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -112,6 +112,7 @@ class CertificationsBase(BaseModel):
     title: str
     issuer: str
     link: str | None = None
+    fk_user: int
 
 
 class CertificationsCreate(CertificationsBase):
@@ -121,7 +122,6 @@ class CertificationsCreate(CertificationsBase):
 
 class Certifications(CertificationsBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -129,6 +129,7 @@ class Certifications(CertificationsBase):
 
 class HonorsAndAwardsBase(BaseModel):
     title: str
+    fk_user: int
 
 
 class HonorsAndAwardsCreate(HonorsAndAwardsBase):
@@ -137,7 +138,6 @@ class HonorsAndAwardsCreate(HonorsAndAwardsBase):
 
 class HonorsAndAwards(HonorsAndAwardsBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -145,6 +145,7 @@ class HonorsAndAwards(HonorsAndAwardsBase):
 
 class InterestsBase(BaseModel):
     interest: str
+    fk_user: int
 
 
 class InterestsCreate(InterestsBase):
@@ -153,7 +154,6 @@ class InterestsCreate(InterestsBase):
 
 class Interests(InterestsBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
@@ -162,6 +162,7 @@ class Interests(InterestsBase):
 class ResumeBase(BaseModel):
     file_path: str
     is_latest: bool
+    fk_user: int
 
 
 class ResumeCreate(ResumeBase):
@@ -170,7 +171,6 @@ class ResumeCreate(ResumeBase):
 
 class Resume(ResumeBase):
     id: int
-    fk_user: int
 
     class Config:
         from_attributes = True
