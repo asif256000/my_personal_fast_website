@@ -37,7 +37,25 @@ def add_data_to_table(db: Session, table_name: str, data: dict):
         return table_instance
     except InvalidRequestError as e:
         db.rollback()
-        return ValueError(f"Data: {data} is not valid for table {table_name}.\nError: {e}")
+        raise ValueError(f"Data: {data} is not valid for table {table_name}.\nError: {e}") from e
+
+
+def delete_data_by_id(db: Session, table_name: str, lookup_id: int):
+    model_class = get_model_class_from_table_name(table_name)
+    record = filter_data_with_id(db, table_name, lookup_id)
+
+    if record:
+        try:
+            db.delete(record)
+            db.commit()
+            return record
+        except InvalidRequestError as e:
+            db.rollback()
+            raise ValueError(f"Failed to delete record with ID {lookup_id} from table {table_name}.\nError: {e}") from e
+    else:
+        return ValueError(
+            f"There is no record with id {lookup_id} in table {table_name}. Returning without deleting any data."
+        )
 
 
 def read_data_from_table(db: Session, table_name: str):
@@ -83,4 +101,4 @@ def update_data_with_id(db: Session, table_name: str, lookup_id: int, data: dict
         return table_data
     except InvalidRequestError as e:
         db.rollback()
-        return ValueError(f"Data: {data} is not valid for table {table_name}.\nError: {e}")
+        raise ValueError(f"Data: {data} is not valid for table {table_name}.\nError: {e}") from e
