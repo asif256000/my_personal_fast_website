@@ -1,7 +1,5 @@
-# Use the official Python image as the base image
 FROM python:3.12.1-slim
 
-# Set the working directory
 WORKDIR /app
 
 # Copy only the necessary files for dependencies installation
@@ -11,9 +9,11 @@ COPY src/requirements.txt /app/src/
 # Install any dependencies
 RUN pip install --no-cache-dir -r src/requirements.txt
 # RUN pip install --no-cache-dir -r test/requirements.txt
+RUN apt-get update && apt-get install -y logrotate
 
 # Copy the contents into the container at /app/
 COPY src /app/src/
+# COPY test /app/test
 COPY static /app/static/
 COPY templates /app/templates/
 COPY logs /app/logs/
