@@ -1,13 +1,11 @@
 version: "3"
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: src/Dockerfile
     ports:
-      - "8000:80"
+      - "8000:8000"
     volumes:
-      - .:/app
-    depends_on:
-      - db
-  db:
-    image: "nouchka/sqlite3"
-    platform: linux/amd64
+      - ./profile.db:/app/profile.db
+      - ./logs:/app/logs
