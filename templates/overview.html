@@ -14,6 +14,41 @@
         </section>
         <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
 
+        <section id="timeline">
+            <div class="timeline-container">
+            {% for year in range(2015, 2025 + 1) %}
+                <div class="timeline-year">
+                    <span>{{ year }}</span>
+                </div>
+            {% endfor %}
+                {% for exp in experience %}
+                    <div class="timeline-block experience">
+                        <h3 class="job-title">{{ exp.title }}</h3>
+                        <h4 class="company">{{ exp.company }}</h4>
+                        <p class="duration">{{ exp.start_date }} - {{ exp.end_date }}</p>
+                        <p class="description">{{ exp.description }}</p>
+                    </div>
+                {% endfor %}
+                {% for edu in education %}
+                    <div class="timeline-block education">
+                        {# <a href="{{ edu.institution_link }}" class="image-link">
+                            <img src="{{ url_for('static', path='/logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}">
+                        </a> #}
+                        <h3 class="degree">{{ edu.degree }}, {{ edu.major }}</h3>
+                        <h4 class="institution">{{ edu.institution }}, {{ edu.location }}</h4>
+                        <p class="duration">From {{ edu.duration_start.strftime("%Y-%b") }} to 
+                        {{ edu.duration_end.strftime("%Y-%b") if edu.duration_end < curr_date else edu.duration_end.strftime("%Y-%b")+" (Expected)" }}</p>
+                        {% if edu.important_links %}
+                            {% for title, link in edu.important_links.items() %}
+                                <p class="link"><b>{{ title }}: </b><a href="{{ link }}">{{ link }}</a></p>
+                            {% endfor %}
+                        {% endif %}
+                        <p class="gpa">{{ "Final grade" if edu.duration_end < curr_date else "Grade so far"}}: <b>{{ edu.gpa }}</b></p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
         {# TODO:Merge Education and Experience into one section and put a straight line as timeline. Left for exp, right for edu. #}
         <section id="experience">
             <h2 style="margin: 0;">Experience</h2>
