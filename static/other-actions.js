@@ -13,9 +13,23 @@ window.onload = function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const timelineEvents = document.querySelectorAll(".timeline-event");
+  const timelineLine = document.querySelector(".timeline-line");
+
+  const startYear = 2013;
+  const endYear = 2024;
 
   const pixelsPerMonth = 10; // Adjust as needed
-  let maxEndDate = new Date(2013, 0); // Initialize with the new start of the timeline
+  let maxEndDate = new Date(endYear, 0); // Set the max end date to the last year
+
+  // Add year markers dynamically
+  for (let year = startYear; year <= endYear; year++) {
+    const yearMarker = document.createElement("div");
+    yearMarker.className = "year-marker";
+    yearMarker.textContent = year;
+    const yearOffset = (year - startYear) * 12 * pixelsPerMonth;
+    yearMarker.style.top = yearOffset + "px";
+    timelineLine.appendChild(yearMarker);
+  }
 
   timelineEvents.forEach((event) => {
     const startDate = event.getAttribute("data-start");
@@ -32,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let topOffset;
     let adjustedStart = start;
 
-    if (start < new Date(2013, 0)) {
-      adjustedStart = new Date(2013, 0);
+    if (start < new Date(startYear, 0)) {
+      adjustedStart = new Date(startYear, 0);
       topOffset = 0;
 
       // Add the original start date display
@@ -44,7 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
       event.style.paddingTop = "30px"; // Add space for the start date
     } else {
       topOffset =
-        ((start.getFullYear() - 2013) * 12 + start.getMonth()) * pixelsPerMonth;
+        ((start.getFullYear() - startYear) * 12 + start.getMonth()) *
+        pixelsPerMonth;
     }
 
     // Calculate the height based on the adjusted start date
@@ -52,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       (end.getFullYear() - adjustedStart.getFullYear()) * 12 +
       (end.getMonth() - adjustedStart.getMonth());
 
-    const height = months * pixelsPerMonth;
+    const height = Math.max(months * pixelsPerMonth, 100); // Ensure a minimum height
     event.style.height = height + "px";
     event.style.top = topOffset + "px";
   });
@@ -60,11 +75,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Adjust the timeline container height
   const timelineContainer = document.querySelector(".timeline");
   const totalMonths =
-    (maxEndDate.getFullYear() - 2013) * 12 + maxEndDate.getMonth();
+    (maxEndDate.getFullYear() - startYear) * 12 + maxEndDate.getMonth();
   const timelineHeight = totalMonths * pixelsPerMonth;
   timelineContainer.style.height = timelineHeight + "px";
 
   // Adjust the timeline line height
-  const timelineLine = document.querySelector(".timeline-line");
   timelineLine.style.height = timelineHeight + "px";
 });

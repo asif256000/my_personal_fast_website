@@ -289,54 +289,59 @@ nav ul li a.active {
   position: absolute;
   left: 50%;
   width: 2px;
-  background-color: #d4d4d4;
   top: 0;
   bottom: 0;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.timeline-line::before {
-  content: "2013";
-  position: absolute;
-  left: -25px;
-  top: 0;
-  color: #888;
-  font-size: 14px;
-}
-
+.timeline-line::before,
 .timeline-line::after {
-  content: "2024";
+  content: "";
+  flex-grow: 1;
+  background-color: #d4d4d4;
+}
+
+.year-marker {
   position: absolute;
   left: -25px;
-  bottom: 0;
   color: #888;
   font-size: 14px;
+  background-color: #fff; /* Ensure the background color matches the page */
+  padding: 0 5px;
+  z-index: 2;
+  height: 14px;
+  line-height: 14px; /* Ensure proper positioning */
 }
 
 .timeline-event {
   position: absolute;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 45%;
+  justify-content: center; /* Center-align content horizontally */
+  align-items: center; /* Center-align content vertically */
+  width: 40%; /* Reduced width for margin on the sides */
   z-index: 2;
   box-sizing: border-box;
   min-height: 50px; /* Ensure minimum height */
+  margin: 0 5%; /* Add margin to create space on sides */
 }
 
 .timeline-event.education {
   left: 0;
   padding-right: 10%;
-  text-align: right;
 }
 
 .timeline-event.experience {
   right: 0;
   padding-left: 10%;
-  text-align: left;
 }
 
 .timeline-event .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
   border-radius: 4px;
   color: white;
@@ -344,6 +349,7 @@ nav ul li a.active {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: center; /* Center-align text inside the box */
 }
 
 .timeline-event.education .content {
@@ -352,6 +358,15 @@ nav ul li a.active {
 
 .timeline-event.experience .content {
   margin-left: 20px;
+}
+
+.timeline-event .content h3,
+.timeline-event .content p {
+  margin: 5px 0; /* Reduced gap between h3 and p */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .timeline-event::before {
