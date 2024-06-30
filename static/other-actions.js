@@ -57,26 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (start < new Date(startYear, 0)) {
       adjustedStart = new Date(startYear, 0);
       topOffset = 0;
-
-      // Remove any previously added start date elements
-      const existingStartDate = event.querySelector(".start-date");
-      if (existingStartDate) {
-        existingStartDate.remove();
-      }
-
-      // Add the original start date display only if it hasn't been added
-      const startLabel = document.createElement("div");
-      startLabel.className = "start-date start-date-added"; // Add a class to mark that it's been added
-      startLabel.textContent = startDate;
-      event.insertBefore(startLabel, event.firstChild);
-      event.style.paddingTop = "30px"; // Add space for the start date
     } else {
       topOffset =
         ((start.getFullYear() - startYear) * 12 + start.getMonth()) *
         pixelsPerMonth;
-
-      // Add the original start date using the ::before pseudo-element
-      event.classList.add("add-start-date");
     }
 
     // Calculate the height based on the adjusted start date
