@@ -41,6 +41,49 @@
         </section>
         <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
 
+        <section id="skills">
+            <h2 style="margin: 0;">Proficient Skills</h2>
+            <table style="border-spacing: 0; border-collapse: collapse;">
+            <tbody>
+                {% for skill_category, all_skills in skills.items() %}
+                    {% set adv_skills = ", ".join(all_skills.get("Advanced", [])) %}
+                    {% set int_skills = ", ".join(all_skills.get("Intermediate", [])) %}
+                    <tr>
+                        <td style="padding-right: 5px;"><b>{{ skill_category }}</b></td>
+                        <td style="padding-left: 5px; max-width: 75vw;">
+                            <p>
+                                <span style="opacity: 1;">{{ adv_skills }}</span>
+                                {% if int_skills %}
+                                    <span style="opacity: 0.6;">| {{ int_skills }}</span>
+                                {% endif %}
+                            </p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </section>
+        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <table style="border-spacing: 0; border-collapse: collapse;">
+                <tbody>
+                    {% for proj in projects %}
+                        <tr>
+                            <td style="padding: 5px;">{{ proj.title }}</td>
+                            {% if proj.link %}
+                                <td style="padding: 5px;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                            {% else %}
+                                <td style="padding: 5px;">For details, go to <a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a> page...</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+
         <section id="experience">
             <h2 style="margin: 0;">Experience</h2>
             <table style="border-spacing: 0; border-collapse: collapse;">
@@ -101,49 +144,6 @@
                     </tr>
                 {% endfor %}
             </tbody>
-            </table>
-        </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
-
-        <section id="skills">
-            <h2 style="margin: 0;">Proficient Skills</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody>
-                {% for skill_category, all_skills in skills.items() %}
-                    {% set adv_skills = ", ".join(all_skills.get("Advanced", [])) %}
-                    {% set int_skills = ", ".join(all_skills.get("Intermediate", [])) %}
-                    <tr>
-                        <td style="padding-right: 5px;"><b>{{ skill_category }}</b></td>
-                        <td style="padding-left: 5px; max-width: 75vw;">
-                            <p>
-                                <span style="opacity: 1;">{{ adv_skills }}</span>
-                                {% if int_skills %}
-                                    <span style="opacity: 0.6;">| {{ int_skills }}</span>
-                                {% endif %}
-                            </p>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-            </table>
-        </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-                <tbody>
-                    {% for proj in projects %}
-                        <tr>
-                            <td style="padding: 5px;">{{ proj.title }}</td>
-                            {% if proj.link %}
-                                <td style="padding: 5px;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
-                            {% else %}
-                                <td style="padding: 5px;">For details, go to <a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a> page...</td>
-                            {% endif %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
             </table>
         </section>
         <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
