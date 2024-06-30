@@ -267,44 +267,109 @@ nav ul li a.active {
   bottom: 10vh;
 }
 
-#timeline {
+.timeline {
   position: relative;
-  padding: 20px;
-  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+  overflow: hidden; /* Ensure the container height adjusts dynamically */
 }
 
-#timeline::before {
+.timeline::after {
   content: "";
+  display: table;
+  clear: both;
+}
+
+.timeline,
+.timeline * {
+  box-sizing: border-box;
+}
+
+.timeline-line {
   position: absolute;
-  top: 0;
-  bottom: 0;
   left: 50%;
   width: 2px;
-  background: #c5c5c5;
+  background-color: #d4d4d4;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
 }
 
-#timeline .timeline-container {
+.timeline-line::before {
+  content: "2013";
+  position: absolute;
+  left: -25px;
+  top: 0;
+  color: #888;
+  font-size: 14px;
+}
+
+.timeline-line::after {
+  content: "2024";
+  position: absolute;
+  left: -25px;
+  bottom: 0;
+  color: #888;
+  font-size: 14px;
+}
+
+.timeline-event {
+  position: absolute;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#timeline .timeline-year {
-  width: 100%;
-  text-align: center;
-}
-
-#timeline .timeline-block {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-}
-
-#timeline .timeline-block.experience {
-  justify-content: flex-start;
-}
-
-#timeline .timeline-block.education {
   justify-content: flex-end;
+  align-items: center;
+  width: 45%;
+  z-index: 2;
+  box-sizing: border-box;
+  min-height: 50px; /* Ensure minimum height */
+}
+
+.timeline-event.education {
+  left: 0;
+  padding-right: 10%;
+  text-align: right;
+}
+
+.timeline-event.experience {
+  right: 0;
+  padding-left: 10%;
+  text-align: left;
+}
+
+.timeline-event .content {
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  min-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-event.education .content {
+  margin-right: 20px;
+}
+
+.timeline-event.experience .content {
+  margin-left: 20px;
+}
+
+.timeline-event::before {
+  content: attr(data-start);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #888;
+  font-size: 14px;
+  top: -20px; /* Adjust as needed */
+}
+
+/* Ensure the start date is always visible for truncated events */
+.start-date {
+  position: absolute;
+  top: -30px; /* Adjust as needed to ensure visibility */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #888;
+  font-size: 14px;
 }
