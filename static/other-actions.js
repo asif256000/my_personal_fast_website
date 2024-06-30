@@ -27,13 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
     yearMarker.className = "year-marker";
     yearMarker.textContent = year;
     const yearOffset = (year - startYear) * 12 * pixelsPerMonth;
-    yearMarker.style.top = yearOffset + "px";
+    yearMarker.style.top = yearOffset + 30 + "px"; // Adjust the position to account for top padding
     timelineContainer.appendChild(yearMarker);
 
     if (year < endYear) {
       const lineSegment = document.createElement("div");
       lineSegment.className = "timeline-line";
-      lineSegment.style.top = yearOffset + 7 + "px"; // Adjust to place the marker in the middle of the gap
+      lineSegment.style.top = yearOffset + 30 + 7 + "px"; // Adjust to place the marker in the middle of the gap
       lineSegment.style.height = 12 * pixelsPerMonth - 14 + "px"; // Adjust to leave space for the year marker
       timelineContainer.appendChild(lineSegment);
     }
@@ -58,9 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
       adjustedStart = new Date(startYear, 0);
       topOffset = 0;
 
-      // Add the original start date display
+      // Remove any previously added start date elements
+      const existingStartDate = event.querySelector(".start-date");
+      if (existingStartDate) {
+        existingStartDate.remove();
+      }
+
+      // Add the original start date display only if it hasn't been added
       const startLabel = document.createElement("div");
-      startLabel.className = "start-date";
+      startLabel.className = "start-date start-date-added"; // Add a class to mark that it's been added
       startLabel.textContent = startDate;
       event.insertBefore(startLabel, event.firstChild);
       event.style.paddingTop = "30px"; // Add space for the start date
@@ -68,6 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
       topOffset =
         ((start.getFullYear() - startYear) * 12 + start.getMonth()) *
         pixelsPerMonth;
+
+      // Add the original start date using the ::before pseudo-element
+      event.classList.add("add-start-date");
     }
 
     // Calculate the height based on the adjusted start date
@@ -77,12 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const height = Math.max(months * pixelsPerMonth, 100); // Ensure a minimum height
     event.style.height = height + "px";
-    event.style.top = topOffset + "px";
+    event.style.top = topOffset + 30 + "px"; // Adjust for top padding
   });
 
   // Adjust the timeline container height
   const totalMonths =
     (maxEndDate.getFullYear() - startYear) * 12 + maxEndDate.getMonth();
   const timelineHeight = totalMonths * pixelsPerMonth;
-  timelineContainer.style.height = timelineHeight + "px";
+  timelineContainer.style.height = timelineHeight + 30 + "px"; // Adjust for top padding
 });

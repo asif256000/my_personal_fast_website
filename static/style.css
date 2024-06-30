@@ -270,7 +270,7 @@ nav ul li a.active {
 .timeline {
   position: relative;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 60px 0 20px 0; /* Add padding to the top and bottom */
   overflow: hidden; /* Ensure the container height adjusts dynamically */
 }
 
@@ -294,8 +294,8 @@ nav ul li a.active {
 
 .year-marker {
   position: absolute;
-  left: 50%; /* Center the marker */
-  transform: translateX(-50%); /* Adjust to align correctly */
+  left: calc(50% - 1px); /* Center the marker */
+  transform: translateX(-50%) translateY(-50%); /* Adjust to align correctly */
   color: #888;
   font-size: 14px;
   background-color: transparent; /* Remove the background */
