@@ -20,7 +20,7 @@
                 {# <div class="timeline-line"></div> #}
 
                 {% for edu in education %}
-                    <div class="timeline-event education" data-start="{{ edu.duration_start.strftime('%Y-%m') }}" data-end="{{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else curr_date.strftime('%Y-%m') }}" style="background-color: #F44336;">
+                    <div class="timeline-event education" data-start="{{ edu.duration_start.strftime('%Y-%m') }}" data-end="{{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else curr_date.strftime('%Y-%m') }}">
                         <div class="content">
                             <h3>{{ edu.degree }} ({{ edu.major }})</h3>
                             <p>{{ edu.institution }}</p>
@@ -29,7 +29,7 @@
                 {% endfor %}
 
                 {% for exp in experience %}
-                    <div class="timeline-event experience" data-start="{{ exp.duration_start.strftime('%Y-%m') }}" data-end="{{ exp.duration_end.strftime('%Y-%m') if exp.duration_end else curr_date.strftime('%Y-%m') }}" style="background-color: #4CAF50;">
+                    <div class="timeline-event experience" data-start="{{ exp.duration_start.strftime('%Y-%m') }}" data-end="{{ exp.duration_end.strftime('%Y-%m') if exp.duration_end else curr_date.strftime('%Y-%m') }}">
                         <div class="content">
                             <h3>{{ exp.title }}</h3>
                             <p>{{ exp.company }}</p>
