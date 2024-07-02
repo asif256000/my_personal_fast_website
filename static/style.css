@@ -299,11 +299,13 @@ nav ul li a.active {
 .timeline-event.education {
   left: 0;
   background-color: #aaa;
+  text-align: left;
 }
 
 .timeline-event.experience {
   right: 0;
   background-color: #888;
+  text-align: right;
 }
 
 .timeline-event .content {
@@ -311,6 +313,7 @@ nav ul li a.active {
   flex-direction: column;
   padding: 10px;
   color: white;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -359,7 +362,6 @@ nav ul li a.active {
   top: 0;
   width: 50%;
   text-align: center;
-  font-weight: bold;
 }
 
 .left-heading {
