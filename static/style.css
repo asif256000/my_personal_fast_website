@@ -291,7 +291,6 @@ nav ul li a.active {
   align-items: center; /* Center-align content vertically */
   width: 42%; /* Reduced width for margin on the sides */
   box-sizing: border-box;
-  min-height: 20px; /* Ensure minimum height */
   margin: 0 3%; /* Add margin to create space on sides */
   border-radius: 10px;
   border: #000 solid 2px;
