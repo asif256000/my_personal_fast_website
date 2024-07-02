@@ -16,41 +16,34 @@ document.addEventListener("DOMContentLoaded", function () {
   const timelineContainer = document.querySelector(".timeline");
 
   const startYear = 2013;
-  const endYear = 2024;
-
-  const pixelsPerMonth = 10; // Adjust as needed
-  let maxEndDate = new Date(endYear, 0); // Set the max end date to the last year
+  let endYear = startYear; // Initialize endYear as startYear for comparison
 
   timelineEvents.forEach((event) => {
-    const startDate = event.getAttribute("data-start");
     const endDate = event.getAttribute("data-end");
-
-    const start = new Date(startDate);
     const end = new Date(endDate);
 
-    // Update the maximum end date
-    if (end > maxEndDate) {
-      maxEndDate = end;
+    // Update the endYear if this event ends later than the current endYear
+    if (end.getFullYear() > endYear) {
+      endYear = end.getFullYear();
     }
 
-    let topOffset;
+    const startDate = event.getAttribute("data-start");
+    const start = new Date(startDate);
+
+    let topOffset = 0;
     let adjustedStart = start;
 
     if (start < new Date(startYear, 0)) {
       adjustedStart = new Date(startYear, 0);
-      topOffset = 0;
     } else {
       topOffset =
-        ((start.getFullYear() - startYear) * 12 + start.getMonth()) *
-        pixelsPerMonth;
+        ((start.getFullYear() - startYear) * 12 + start.getMonth()) * 10; // assuming pixelsPerMonth is 10
     }
 
-    // Calculate the height based on the adjusted start date
     const months =
       (end.getFullYear() - adjustedStart.getFullYear()) * 12 +
       (end.getMonth() - adjustedStart.getMonth());
-
-    const height = Math.max(months * pixelsPerMonth, 100); // Ensure a minimum height
+    const height = Math.max(months * 10, 100); // Ensure a minimum height
     event.style.height = height + "px";
     event.style.top = topOffset + 30 + "px"; // Adjust for top padding
   });
@@ -60,22 +53,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const yearMarker = document.createElement("div");
     yearMarker.className = "year-marker";
     yearMarker.textContent = year;
-    const yearOffset = (year - startYear) * 12 * pixelsPerMonth;
-    yearMarker.style.top = yearOffset + 30 + "px"; // Adjust the position to account for top padding
+    const yearOffset = (year - startYear) * 12 * 10; // 10 is pixelsPerMonth
+    yearMarker.style.top = yearOffset + 30 + "px"; // Adjust the position
     timelineContainer.appendChild(yearMarker);
 
     if (year < endYear) {
       const lineSegment = document.createElement("div");
       lineSegment.className = "timeline-line";
       lineSegment.style.top = yearOffset + 30 + 7 + "px"; // Adjust to place the marker in the middle of the gap
-      lineSegment.style.height = 12 * pixelsPerMonth - 14 + "px"; // Adjust to leave space for the year marker
+      lineSegment.style.height = 12 * 10 - 14 + "px"; // Adjust to leave space for the year marker
       timelineContainer.appendChild(lineSegment);
     }
   }
 
   // Adjust the timeline container height
-  const totalMonths =
-    (maxEndDate.getFullYear() - startYear) * 12 + maxEndDate.getMonth();
-  const timelineHeight = totalMonths * pixelsPerMonth;
-  timelineContainer.style.height = timelineHeight + 60 + "px"; // Adjust for top padding
+  const totalMonths = (endYear - startYear) * 12 + 12; // Extend the timeline to December of the end year
+  const timelineHeight = totalMonths * 10;
+  timelineContainer.style.height = timelineHeight + 0 + "px"; // Adjust for top padding
 });
