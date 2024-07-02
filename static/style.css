@@ -325,11 +325,47 @@ nav ul li a.active {
 }
 
 .timeline-event::before {
-  content: attr(data-start);
+  content: attr(data-start); /* Display the start date */
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #888;
-  font-size: 14px;
-  top: -20px;
+  top: 5px;
+  color: #ddd;
+  font-size: 12px;
+}
+
+.timeline-event::after {
+  content: attr(data-end); /* Display the end date */
+  position: absolute;
+  bottom: 5px;
+  color: #ddd; /* White color for better visibility */
+  font-size: 12px; /* Maintain a consistent font size */
+}
+
+.timeline-event.education::before,
+.timeline-event.education::after {
+  right: 5px; /* Position on the right inside the box */
+  left: auto; /* Ensure left is reset */
+  text-align: right; /* Right-align for education */
+}
+
+.timeline-event.experience::before,
+.timeline-event.experience::after {
+  left: 5px; /* Position on the left inside the box */
+  right: auto; /* Ensure right is reset */
+  text-align: left; /* Left-align for experiences */
+}
+
+.timeline-heading {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.left-heading {
+  left: 0;
+}
+
+.right-heading {
+  right: 0;
 }

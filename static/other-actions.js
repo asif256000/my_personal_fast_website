@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Add year markers and line segments dynamically
-  for (let year = startYear; year <= endYear + 1; year++) {
+  for (let year = startYear; year <= endYear; year++) {
     const yearMarker = document.createElement("div");
     yearMarker.className = "year-marker";
     yearMarker.textContent = year;
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     yearMarker.style.top = yearOffset + 30 + "px"; // Adjust the position
     timelineContainer.appendChild(yearMarker);
 
-    if (year <= endYear) {
+    if (year < endYear) {
       const lineSegment = document.createElement("div");
       lineSegment.className = "timeline-line";
       lineSegment.style.top = yearOffset + 30 + 7 + "px"; // Adjust to place the marker in the middle of the gap
