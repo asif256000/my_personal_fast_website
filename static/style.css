@@ -200,11 +200,6 @@ label {
   display: inline-block;
 }
 
-/* .my-image {
-  max-height: 500px;
-  object-fit: cover;
-} */
-
 /* Navigation Bar styles */
 nav ul {
   display: flex;
@@ -217,6 +212,7 @@ nav ul {
 nav ul li {
   flex-grow: 1;
 }
+
 nav ul li a {
   display: block;
   text-align: center;
@@ -270,93 +266,62 @@ nav ul li a.active {
 .timeline {
   position: relative;
   margin: 0 auto;
-  padding: 60px 0 60px 0; /* Add padding to the top and bottom */
-  overflow: hidden; /* Ensure the container height adjusts dynamically */
-}
-
-.timeline::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.timeline,
-.timeline * {
-  box-sizing: border-box;
 }
 
 .timeline-line {
   position: absolute;
-  left: calc(50% - 1px); /* Center the line */
+  left: calc(50%);
   width: 2px;
-  background-color: #d4d4d4;
+  background-color: #888;
 }
 
 .year-marker {
   position: absolute;
-  left: calc(50% - 1px); /* Center the marker */
-  transform: translateX(-50%) translateY(-50%); /* Adjust to align correctly */
+  left: calc(50%);
+  transform: translate(-50%) translateY(-50%);
   color: #888;
+  text-shadow: #444;
   font-size: 14px;
-  background-color: transparent; /* Remove the background */
-  z-index: 2;
 }
 
 .timeline-event {
   position: absolute;
   display: flex;
-  justify-content: center; /* Center-align content horizontally */
+  /* justify-content: center; Center-align content horizontally */
   align-items: center; /* Center-align content vertically */
-  width: 40%; /* Reduced width for margin on the sides */
-  z-index: 2;
+  width: 42%; /* Reduced width for margin on the sides */
   box-sizing: border-box;
-  min-height: 50px; /* Ensure minimum height */
-  margin: 0 5%; /* Add margin to create space on sides */
-  border-radius: 4px;
+  min-height: 20px; /* Ensure minimum height */
+  margin: 0 3%; /* Add margin to create space on sides */
+  border-radius: 10px;
   border: #000 solid 2px;
 }
 
 .timeline-event.education {
   left: 0;
-  padding-right: 10%;
   background-color: #aaa;
 }
 
 .timeline-event.experience {
   right: 0;
-  padding-left: 10%;
   background-color: #888;
 }
 
 .timeline-event .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 10px;
-  border-radius: 4px;
   color: white;
-  min-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: center; /* Center-align text inside the box */
-}
-
-.timeline-event.education .content {
-  margin-right: 20px;
-}
-
-.timeline-event.experience .content {
-  margin-left: 20px;
 }
 
 .timeline-event .content h3,
 .timeline-event .content p {
-  margin: 5px 0; /* Reduced gap between h3 and p */
+  margin: 2px 0; /* Reduced gap between h3 and p */
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
   max-width: 100%;
 }
 
@@ -367,15 +332,5 @@ nav ul li a.active {
   transform: translateX(-50%);
   color: #888;
   font-size: 14px;
-  top: -20px; /* Adjust as needed */
-}
-
-/* Ensure the start date is always visible for truncated events */
-.start-date {
-  position: absolute;
-  top: -30px; /* Adjust as needed to ensure visibility */
-  left: 50%;
-  transform: translateX(-50%);
-  color: #888;
-  font-size: 14px;
+  top: -15px;
 }
