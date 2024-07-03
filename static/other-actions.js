@@ -15,61 +15,72 @@ document.addEventListener("DOMContentLoaded", function () {
   const timelineEvents = document.querySelectorAll(".timeline-event");
   const timelineContainer = document.querySelector(".timeline");
 
-  const startYear = 2014;
-  let endYear = startYear;
+  const baseYear = 2014;
+  let endYear = baseYear;
   let pixelsPerMonth = 10;
 
-  timelineEvents.forEach((event) => {
+  function calculatePosition(event) {
+    const startDate = event.getAttribute("data-start");
     const endDate = event.getAttribute("data-end");
+
+    let start = new Date(startDate);
     const end = new Date(endDate);
 
-    // Update the endYear if this event ends later than the current endYear
+    // Update the maximum end year found so far.
     if (end.getFullYear() > endYear) {
       endYear = end.getFullYear();
     }
 
-    const startDate = event.getAttribute("data-start");
-    const start = new Date(startDate);
-
-    let topOffset = 0;
-    let adjustedStart = start;
-
-    if (start < new Date(startYear, 0)) {
-      adjustedStart = new Date(startYear, 0);
-    } else {
-      topOffset =
-        ((start.getFullYear() - startYear) * 12 + start.getMonth()) *
-        pixelsPerMonth;
+    // Cap the start date to the base year if it's earlier
+    if (start.getFullYear() < baseYear) {
+      start = new Date(baseYear, 0); // January of the base year
     }
 
-    const months =
-      (end.getFullYear() - adjustedStart.getFullYear()) * 12 +
-      (end.getMonth() - adjustedStart.getMonth());
-    const height = Math.max(months * pixelsPerMonth, 100);
-    event.style.height = height + "px";
-    event.style.top = topOffset + 30 + "px"; // Adjust for top padding
-  });
+    // Calculate the offset for the start month from the base year
+    const startMonthsFromBase =
+      (start.getFullYear() - baseYear) * 12 + start.getMonth();
 
-  // Add year markers and line segments dynamically
-  for (let year = startYear; year <= endYear; year++) {
+    // Calculate the offset for the end month from the base year
+    const endMonthsFromBase =
+      (end.getFullYear() - baseYear) * 12 + end.getMonth();
+
+    // Ensure that the start month is not greater than the end month
+    const monthsDuration = Math.max(
+      endMonthsFromBase - startMonthsFromBase + 1,
+      1
+    );
+
+    // Set the height of the box based on number of months
+    const height = monthsDuration * pixelsPerMonth;
+
+    // Set the top position of the box
+    const topPosition = startMonthsFromBase * pixelsPerMonth + 30; // 30px for the offset
+
+    event.style.top = `${topPosition}px`;
+    event.style.height = `${height}px`;
+  }
+
+  // Calculate positions for each event
+  timelineEvents.forEach(calculatePosition);
+
+  // Add year markers and adjust container height
+  for (let year = baseYear; year <= endYear; year++) {
     const yearMarker = document.createElement("div");
     yearMarker.className = "year-marker";
     yearMarker.textContent = year;
-    const yearOffset = (year - startYear) * 12 * pixelsPerMonth;
+    const yearOffset = (year - baseYear) * 12 * pixelsPerMonth;
     yearMarker.style.top = yearOffset + 30 + "px"; // Adjust the position
     timelineContainer.appendChild(yearMarker);
 
-    if (year < endYear) {
-      const lineSegment = document.createElement("div");
-      lineSegment.className = "timeline-line";
-      lineSegment.style.top = yearOffset + 30 + 7 + "px"; // Adjust to place the marker in the middle of the gap
-      lineSegment.style.height = 12 * pixelsPerMonth - 14 + "px";
-      timelineContainer.appendChild(lineSegment);
-    }
+    // Line segments for each year
+    const lineSegment = document.createElement("div");
+    lineSegment.className = "timeline-line";
+    lineSegment.style.top = yearOffset + 30 + 7 + "px";
+    lineSegment.style.height = 12 * pixelsPerMonth - 14 + "px";
+    timelineContainer.appendChild(lineSegment);
   }
 
-  // Adjust the timeline container height
-  const totalMonths = (endYear - startYear) * 12 + 12; // Extend the timeline to December of the end year
-  const timelineHeight = totalMonths * pixelsPerMonth;
-  timelineContainer.style.height = timelineHeight + 0 + "px"; // Adjust for top padding
+  // Set the height of the timeline container
+  const totalMonths = (endYear - baseYear + 1) * 12;
+  timelineContainer.style.height = totalMonths * pixelsPerMonth + 30 + "px"; // Adjust for top padding
 });
