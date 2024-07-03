@@ -17,8 +17,8 @@
         <section id="timeline">
         <h2 style="margin: 0;">My Timeline</h2>
             <div class="timeline">
-                <div class="timeline-heading left-heading"><h3>Education</h3></div>
-                <div class="timeline-heading right-heading"><h3>Experiences</h3></div>
+                <div class="timeline-heading left-heading">Education</div>
+                <div class="timeline-heading right-heading">Experiences</div>
 
                 {% for edu in education %}
                     <div class="timeline-event education" data-start="{{ edu.duration_start.strftime('%Y-%m') }}" data-end="{{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else curr_date.strftime('%Y-%m') }}">
