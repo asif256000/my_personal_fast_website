@@ -371,6 +371,16 @@ nav ul li a.active {
   text-align: center;
 }
 
+.timeline-heading h3 {
+  display: inline-block;
+  padding: 10px 20px; /* Add some padding inside the box */
+  border: 2px solid black; /* Black border */
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  box-shadow: 0 0 10px white; /* White shadow */
+  border-radius: 10px; /* Optional: add some border radius for rounded corners */
+  margin: 0; /* Remove default margin */
+}
+
 .left-heading {
   left: 0;
 }
