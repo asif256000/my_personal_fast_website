@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const baseYear = 2014;
   let endYear = baseYear;
-  let pixelsPerMonth = 10;
+  const pixelsPerMonth = 10;
 
   function calculatePosition(event) {
     const startDate = event.getAttribute("data-start");
@@ -58,6 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     event.style.top = `${topPosition}px`;
     event.style.height = `${height}px`;
+
+    if (monthsDuration < 4) {
+      // Hide the <p> tag if duration is less than 4 months
+      const pTag = event.querySelector(".content p");
+      if (pTag) {
+        pTag.style.display = "none";
+      }
+      // Clear the data-end attribute
+      event.setAttribute("data-end", "");
+    }
   }
 
   // Calculate positions for each event
