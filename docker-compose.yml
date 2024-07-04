@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: src/Dockerfile
     ports:
-      - "8000:8000"
+      - "8000:80"
     volumes:
       - ./profile.db:/app/profile.db
       - ./logs:/app/logs

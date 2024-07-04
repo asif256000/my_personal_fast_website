@@ -19,10 +19,13 @@ COPY templates /app/templates/
 COPY logs /app/logs/
 COPY .env /app/
 COPY profile.db /app/
+# COPY run_server.sh /run_server.sh
+# # Make sure the script is executable
+# RUN chmod +x /run_server.sh
 
 # Expose the port that Uvicorn will run on
-EXPOSE 8000
+EXPOSE 80
 
 # Command to run the application
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
 
