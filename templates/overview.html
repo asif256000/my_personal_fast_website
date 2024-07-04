@@ -23,8 +23,21 @@
                 {% for edu in education %}
                     <div class="timeline-event education" data-start="{{ edu.duration_start.strftime('%Y-%m') }}" data-end="{{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else curr_date.strftime('%Y-%m') }}">
                         <div class="content">
-                            <h3>{{ edu.degree }} ({{ edu.major }})</h3>
+                            <h3>{{ edu.degree }} - {{ edu.major }}</h3>
                             <p>{{ edu.institution }}</p>
+                        </div>
+                        <div class="detail-box">
+                            <a href="{{ edu.institution_link }}" class="timeline-logo-link">
+                                <img src="{{ url_for('static', path='logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}" class="logo">
+                            </a>
+                            <div class="details">
+                                <strong>Degree:</strong> {{ edu.degree }}<br>
+                                <strong>Field:</strong> {{ edu.major }}<br>
+                                <strong>Institution:</strong> {{ edu.institution }}<br>
+                                <strong>Location:</strong> {{ edu.location }}<br>
+                                <strong>Duration:</strong> {{ edu.duration_start.strftime('%Y-%m') }} to {{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else 'Present' }}<br>
+                                <strong>{{ "Final grade" if edu.duration_end < curr_date else "Grade so far"}}:</strong> {{ edu.gpa }}<br>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
@@ -34,6 +47,20 @@
                         <div class="content">
                             <h3>{{ exp.title }}</h3>
                             <p>{{ exp.company }}</p>
+                        </div>
+                        <div class="detail-box">
+                        <a href="{{ exp.company_link }}" class="timeline-logo-link">
+                                <img src="{{ url_for('static', path='logos/' + exp.company_logo) }}" alt="{{ exp.company }}" class="logo">
+                            </a>
+                            <div class="details">
+                                <strong>Title:</strong> {{ exp.title}}<br>
+                                <strong>Organization:</strong> {{ exp.company }}<br>
+                                <strong>Location:</strong> {{ exp.location }}<br>
+                                <strong>Duration:</strong> {{ exp.duration_start.strftime('%Y-%m') }} to {{ exp.duration_end.strftime('%Y-%m') if exp.duration_end else 'Present' }}
+                                {% if exp.tech_stack %}
+                                    <br><strong>Tech stack used:</strong> {{ exp.tech_stack }}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

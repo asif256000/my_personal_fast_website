@@ -37,53 +37,55 @@ document.addEventListener("DOMContentLoaded", function () {
       start = new Date(baseYear, 0); // January of the base year
     }
 
-    // Calculate the offset for the start month from the base year
     const startMonthsFromBase =
       (start.getFullYear() - baseYear) * 12 + start.getMonth();
-
-    // Calculate the offset for the end month from the base year
     const endMonthsFromBase =
       (end.getFullYear() - baseYear) * 12 + end.getMonth();
-
-    // Ensure that the start month is not greater than the end month
     const monthsDuration = Math.max(
       endMonthsFromBase - startMonthsFromBase + 1,
       1
     );
 
-    // Set the height of the box based on number of months
     const height = monthsDuration * pixelsPerMonth;
-
-    // Set the top position of the box
-    const topPosition = startMonthsFromBase * pixelsPerMonth + topOffset; // Increased top offset
+    const topPosition = startMonthsFromBase * pixelsPerMonth + topOffset;
 
     event.style.top = `${topPosition}px`;
     event.style.height = `${height}px`;
 
-    // Hide the <p> tag and clear the data-end attribute if duration is less than 4 months
     if (monthsDuration < 4) {
       const pTag = event.querySelector(".content p");
       if (pTag) {
         pTag.style.display = "none";
       }
-      // Clear the data-end attribute
       event.setAttribute("data-end", "");
     }
   }
 
-  // Calculate positions for each event
   timelineEvents.forEach(calculatePosition);
+  timelineEvents.forEach((event) => {
+    event.addEventListener("mouseenter", function () {
+      const detailBox = this.querySelector(".detail-box");
+      if (detailBox) {
+        const boxRect = detailBox.getBoundingClientRect();
+        if (boxRect.right > window.innerWidth) {
+          detailBox.style.left = "auto";
+          detailBox.style.right = "100%"; // Flip to the left
+        } else if (boxRect.left < 0) {
+          detailBox.style.right = "auto";
+          detailBox.style.left = "100%"; // Flip to the right if it goes out of the left side of the viewport
+        }
+      }
+    });
+  });
 
-  // Add year markers and adjust container height
   for (let year = baseYear; year <= endYear; year++) {
     const yearMarker = document.createElement("div");
     yearMarker.className = "year-marker";
     yearMarker.textContent = year;
     const yearOffset = (year - baseYear) * 12 * pixelsPerMonth;
-    yearMarker.style.top = yearOffset + topOffset + "px"; // Adjust the position
+    yearMarker.style.top = yearOffset + topOffset + "px";
     timelineContainer.appendChild(yearMarker);
 
-    // Line segments for each year
     const lineSegment = document.createElement("div");
     lineSegment.className = "timeline-line";
     lineSegment.style.top = yearOffset + topOffset + 7 + "px";
@@ -91,8 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     timelineContainer.appendChild(lineSegment);
   }
 
-  // Set the height of the timeline container
-  const totalMonths = (endYear - baseYear + 1) * 12;
   timelineContainer.style.height =
-    totalMonths * pixelsPerMonth + topOffset + "px"; // Adjust for top padding
+    (endYear - baseYear + 1) * 12 * pixelsPerMonth + topOffset + "px";
 });
