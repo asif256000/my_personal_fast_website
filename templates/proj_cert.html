@@ -15,7 +15,7 @@
                     <td style="padding: 10px; max-width: 20vw;">{{ proj.title }}</td>
                     <td style="padding: 10px; max-width: 50vw;"><p>{{ proj.description }}</p></td>
                     {% if proj.link %}
-                        <td style="padding: 10px; max-width: 20vw;">Link: <a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                        <td style="padding: 10px; max-width: 20vw; overflow-wrap: break-word;">Link: <a href="{{ proj.link }}">{{ proj.link }}</a></td>
                     {% else %}
                         <td style="padding: 10px; max-width: 20vw;"></td>
                     </tr>
