@@ -6,76 +6,66 @@
 
 {% block content %}
     <div class="main-content">
-    <section id="intro">
-        <p>Hi, I am {{ basic_info.name}}, currently residing in {{ basic_info.location }}.
-        <br>
-        You can reach me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a> 
-        or check out my <a href="{{ basic_info.linkedin }}">LinkedIn</a> or <a href="{{ basic_info.github }}">GitHub</a> profiles.</p>
+        <section id="intro">
+            <p>Hi, I am {{ basic_info.name}}, currently residing in {{ basic_info.location }}.
+            <br>
+            You can reach me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a> 
+            or check out my <a href="{{ basic_info.linkedin }}">LinkedIn</a> or <a href="{{ basic_info.github }}">GitHub</a> profiles.</p>
         </section>
         <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
 
-        {# TODO:Merge Education and Experience into one section and put a straight line as timeline. Left for exp, right for edu. #}
-        <section id="experience">
-            <h2 style="margin: 0;">Experience</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody>
-                {% for exp in experience %}
-                    <tr>
-                    <td style="padding-top: 2px; padding-right: 10px; padding-bottom: 2px; padding-left: 2px; width: 10vw;">
-                        <a href="{{ exp.company_link }}" class="image-link">
-                            <img src="{{ url_for('static', path='/logos/' + exp.company_logo) }}" alt="{{ exp.company }}">
-                        </a>
-                    </td>
-                    <td style="padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 10px; max-width: 85vw;">
-                        <p>
-                        <b style="font-size: x-large;">{{ exp.title }}</b><br>
-                        <b>{{ exp.company }}</b>, <i>{{ exp.location }}</i><br>
-                        From <b>{{ exp.duration_start.strftime("%Y-%b") }}</b>{{ (" to <b>" + exp.duration_end.strftime("%Y-%b") + "</b>" if exp.duration_end else "") | safe}}<br>
-                        {% if exp.important_links %}
-                            {% for title, link in exp.important_links.items() %}
-                                <b>{{ title }}: </b><a href="{{ link }}">{{ link }}</a><br>
-                            {% endfor %}
-                        {% endif %}
-                        {{ "Tech stack used: " + exp.tech_stack if exp.tech_stack else "" }}
-                        </p>
-                    </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-            </table>
-        </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <section id="timeline">
+        <h2 style="margin: 0;">My Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-heading left-heading"><h3>Education</h3></div>
+                <div class="timeline-heading right-heading"><h3>Experiences</h3></div>
 
-        <section id="education">
-            <h2 style="margin: 0;">Education</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody>
                 {% for edu in education %}
-                    <tr style="padding: 2px;">
-                    <td style="padding-top: 2px; padding-right: 10px; padding-bottom: 2px; padding-left: 2px; width: 10vw;">
-                        <a href="{{ edu.institution_link }}" class="image-link">
-                            <img src="{{ url_for('static', path='/logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}">
-                        </a>
-                    </td>
-                    <td style="padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 10px; max-width: 75vw;">
-                        <p>
-                        <b style="font-size: x-large;">{{ edu. degree }}</b>, <b style="font-size: large;">{{ edu.major }}</b><br>
-                        <b>{{ edu.institution }}</b>, <i>{{ edu.location }}</i><br>
-                        From <b>{{ edu.duration_start.strftime("%Y-%b") }}</b> to 
-                        <b>{{ edu.duration_end.strftime("%Y-%b") if edu.duration_end < curr_date else edu.duration_end.strftime("%Y-%b")+" (Expected)" }}</b><br>
-                        {% if edu.important_links %}
-                            {% for title, link in edu.important_links.items() %}
-                                <b>{{ title }}: </b><a href="{{ link }}">{{ link }}</a>&nbsp;&nbsp;&nbsp;
-                            {% endfor %}
-                        <br>
-                        {% endif %}
-                        {{ "Final grade" if edu.duration_end < curr_date else "Grade so far"}}: <b>{{ edu.gpa }}</b><br>
-                        </p>
-                    </td>
-                    </tr>
+                    <div class="timeline-event education" data-start="{{ edu.duration_start.strftime('%Y-%m') }}" data-end="{{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else curr_date.strftime('%Y-%m') }}">
+                        <div class="content">
+                            <h3>{{ edu.degree }} - {{ edu.major }}</h3>
+                            <p>{{ edu.institution }}</p>
+                        </div>
+                        <div class="detail-box">
+                            <a href="{{ edu.institution_link }}" class="timeline-logo-link">
+                                <img src="{{ url_for('static', path='logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}" class="logo">
+                            </a>
+                            <div class="details">
+                                <strong>Degree:</strong> {{ edu.degree }}<br>
+                                <strong>Field:</strong> {{ edu.major }}<br>
+                                <strong>Institution:</strong> {{ edu.institution }}<br>
+                                <strong>Location:</strong> {{ edu.location }}<br>
+                                <strong>Duration:</strong> {{ edu.duration_start.strftime('%Y-%m') }} to {{ edu.duration_end.strftime('%Y-%m') if edu.duration_end else 'Present' }}<br>
+                                <strong>{{ "Final grade" if edu.duration_end < curr_date else "Grade so far"}}:</strong> {{ edu.gpa }}<br>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </tbody>
-            </table>
+
+                {% for exp in experience %}
+                    <div class="timeline-event experience" data-start="{{ exp.duration_start.strftime('%Y-%m') }}" data-end="{{ exp.duration_end.strftime('%Y-%m') if exp.duration_end else curr_date.strftime('%Y-%m') }}">
+                        <div class="content">
+                            <h3>{{ exp.title }}</h3>
+                            <p>{{ exp.company }}</p>
+                        </div>
+                        <div class="detail-box">
+                        <a href="{{ exp.company_link }}" class="timeline-logo-link">
+                                <img src="{{ url_for('static', path='logos/' + exp.company_logo) }}" alt="{{ exp.company }}" class="logo">
+                            </a>
+                            <div class="details">
+                                <strong>Title:</strong> {{ exp.title}}<br>
+                                <strong>Organization:</strong> {{ exp.company }}<br>
+                                <strong>Location:</strong> {{ exp.location }}<br>
+                                <strong>Duration:</strong> {{ exp.duration_start.strftime('%Y-%m') }} to {{ exp.duration_end.strftime('%Y-%m') if exp.duration_end else 'Present' }}
+                                {% if exp.tech_stack %}
+                                    <br><strong>Tech stack used:</strong> {{ exp.tech_stack }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
         </section>
         <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
 
