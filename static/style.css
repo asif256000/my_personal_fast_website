@@ -404,13 +404,13 @@ nav ul li a.active {
 }
 
 .timeline-logo-link {
-  flex: 0 0 5vw; /* Adjust logo container size to 5% of the viewport width */
-  width: 5vw; /* Width of the logo */
-  height: 5vw; /* Height of the logo, ensuring square dimensions */
-  display: flex; /* Using flex to center the image vertically and horizontally */
+  flex: 0 0 10vw;
+  max-width: 10vw;
+  max-height: 10vw;
+  display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Ensures no overflow if the image is larger than the container */
+  overflow: hidden;
 }
 
 .timeline-event:hover .detail-box {
@@ -422,6 +422,7 @@ nav ul li a.active {
   max-width: 100%; /* Ensures the logo does not exceed the container width */
   max-height: 100%; /* Ensures the logo does not exceed the container height */
   height: auto; /* Maintains aspect ratio */
+  object-fit: contain;
 }
 
 .detail-box .details {
