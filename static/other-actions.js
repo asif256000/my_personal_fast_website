@@ -46,13 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Cap the start date to the base year if it's earlier
     if (start.getUTCFullYear() < baseYear && start.getUTCMonth() < 6) {
-      start = new Date(baseYear - 1, 7);
+      start = new Date(baseYear - 1, 6);
     }
 
     const startMonthsFromBase =
-      (start.getUTCFullYear() - baseYear) * 12 + start.getUTCMonth();
+      (start.getUTCFullYear() - baseYear) * 12 + start.getUTCMonth() + 1;
     const endMonthsFromBase =
-      (end.getUTCFullYear() - baseYear) * 12 + end.getUTCMonth();
+      (end.getUTCFullYear() - baseYear) * 12 + end.getUTCMonth() + 1;
     const monthsDuration = Math.max(
       endMonthsFromBase - startMonthsFromBase + 1,
       1
