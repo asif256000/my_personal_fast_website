@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const baseYear = 2014;
   let endYear = baseYear;
+  let endMonth = 0;
+  let totalContainerHeight = 0;
   const pixelsPerMonth = 10;
   const topOffset = 60; // Increased offset by 60px
 
@@ -25,29 +27,37 @@ document.addEventListener("DOMContentLoaded", function () {
     let endDate = event.getAttribute("data-end");
 
     let start = new Date(startDate);
+    start.setDate(15); // Set the date to the middle of the month
     const end = new Date(endDate);
+    end.setDate(15); // Set the date to the middle of the month
 
-    // Update the maximum end year found so far.
-    if (end.getFullYear() > endYear) {
-      endYear = end.getFullYear();
+    // Update the maximum endYear and corresponding endMonth found so far
+    if (end.getUTCFullYear() > endYear) {
+      endYear = end.getUTCFullYear();
+      endMonth = end.getUTCMonth();
+    } else if (
+      end.getUTCFullYear() === endYear &&
+      end.getUTCMonth() > endMonth
+    ) {
+      endMonth = end.getUTCMonth();
     }
 
     // Cap the start date to the base year if it's earlier
-    if (start.getFullYear() < baseYear) {
-      start = new Date(baseYear, 0); // January of the base year
+    if (start.getUTCFullYear() < baseYear && start.getUTCMonth() < 6) {
+      start = new Date(baseYear - 1, 6);
     }
 
     const startMonthsFromBase =
-      (start.getFullYear() - baseYear) * 12 + start.getMonth();
+      (start.getUTCFullYear() - baseYear) * 12 + start.getUTCMonth() + 1;
     const endMonthsFromBase =
-      (end.getFullYear() - baseYear) * 12 + end.getMonth();
+      (end.getUTCFullYear() - baseYear) * 12 + end.getUTCMonth() + 1;
     const monthsDuration = Math.max(
       endMonthsFromBase - startMonthsFromBase + 1,
       1
     );
 
     const height = monthsDuration * pixelsPerMonth;
-    const topPosition = startMonthsFromBase * pixelsPerMonth + topOffset;
+    const topPosition = startMonthsFromBase * pixelsPerMonth + topOffset + 60;
 
     event.style.top = `${topPosition}px`;
     event.style.height = `${height}px`;
@@ -61,8 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  timelineEvents.forEach(calculatePosition);
-  timelineEvents.forEach((event) => {
+  function addHoverEffect(event) {
     event.addEventListener("mouseenter", function () {
       const detailBox = this.querySelector(".detail-box");
       if (detailBox) {
@@ -76,23 +85,58 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
-  });
+  }
 
-  for (let year = baseYear; year <= endYear; year++) {
-    const yearMarker = document.createElement("div");
-    yearMarker.className = "year-marker";
-    yearMarker.textContent = year;
-    const yearOffset = (year - baseYear) * 12 * pixelsPerMonth;
-    yearMarker.style.top = yearOffset + topOffset + "px";
-    timelineContainer.appendChild(yearMarker);
+  timelineEvents.forEach(calculatePosition);
+  timelineEvents.forEach(addHoverEffect);
+  endMonth = endMonth + 2;
 
+  function appendStartDashedLineSegment(noOfMonths) {
+    const dashedLineSegment = document.createElement("div");
+    dashedLineSegment.className = "timeline-line dotted";
+    dashedLineSegment.style.top = topOffset - 7 + "px";
+    dashedLineSegment.style.height = noOfMonths * pixelsPerMonth + "px";
+    timelineContainer.appendChild(dashedLineSegment);
+  }
+
+  function appendYearlyLineSegment(yearOffset) {
     const lineSegment = document.createElement("div");
     lineSegment.className = "timeline-line";
-    lineSegment.style.top = yearOffset + topOffset + 7 + "px";
+    lineSegment.style.top = yearOffset + topOffset + 67 + "px";
     lineSegment.style.height = 12 * pixelsPerMonth - 14 + "px";
     timelineContainer.appendChild(lineSegment);
   }
 
+  function appendEndDashedLineSegment(noOfMonths, yearOffset) {
+    const dashedLineSegment = document.createElement("div");
+    dashedLineSegment.className = "timeline-line dotted";
+    dashedLineSegment.style.top = yearOffset + topOffset + 67 + "px";
+    dashedLineSegment.style.height = noOfMonths * pixelsPerMonth - 14 + "px";
+    timelineContainer.appendChild(dashedLineSegment);
+  }
+
+  function appendYearMarker(year, yearOffset) {
+    const yearMarker = document.createElement("div");
+    yearMarker.className = "year-marker";
+    yearMarker.textContent = year;
+    yearMarker.style.top = yearOffset + topOffset + 60 + "px";
+    timelineContainer.appendChild(yearMarker);
+  }
+
+  appendStartDashedLineSegment(6);
+  for (let year = baseYear; year <= endYear; year++) {
+    const yearOffset = (year - baseYear) * 12 * pixelsPerMonth;
+    appendYearMarker(year, yearOffset);
+    if (year === endYear) {
+      appendEndDashedLineSegment(endMonth + 1, yearOffset);
+    } else {
+      appendYearlyLineSegment(yearOffset);
+    }
+  }
+
   timelineContainer.style.height =
-    (endYear - baseYear + 1) * 12 * pixelsPerMonth + topOffset + "px";
+    ((endYear - baseYear) * 12 + endMonth + 1) * pixelsPerMonth +
+    topOffset +
+    60 +
+    "px";
 });

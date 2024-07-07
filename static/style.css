@@ -226,8 +226,9 @@ nav ul li a.active {
   background-color: #888;
 }
 
-.timeline-line.dashed {
-  border-left: 2px dashed #888;
+.timeline-line.dotted {
+  border-left: 2px dotted #888;
+  background: none;
 }
 
 .year-marker {
