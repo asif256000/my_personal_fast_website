@@ -276,6 +276,7 @@ nav ul li a.active {
 }
 
 .timeline-event .content h3,
+.timeline-event .content h4,
 .timeline-event .content p {
   margin: 2px 0;
   overflow: hidden;
@@ -323,11 +324,11 @@ nav ul li a.active {
 
 .timeline-heading h3 {
   display: inline-block;
-  padding: 10px 20px; /* Add some padding inside the box */
-  border: 2px solid black; /* Black border */
-  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  padding: 10px 20px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 10px white;
-  border-radius: 10px; /* Optional: add some border radius for rounded corners */
+  border-radius: 10px;
   margin: 0; /* Remove default margin */
 }
 
@@ -342,7 +343,8 @@ nav ul li a.active {
 .detail-box {
   display: none; /* Ensures detail box is hidden by default */
   position: absolute;
-  background-color: #aaa; /* Sets background color to light grey */
+  background-color: #ddd;
+  color: #555;
   border: 1px solid #666;
   padding: 10px;
   width: max-content; /* Set width to automatically adjust to content */
@@ -366,19 +368,19 @@ nav ul li a.active {
 
 .timeline-event:hover .detail-box {
   display: flex; /* Shows the detail box when event box is hovered */
-  flex-direction: row; /* Ensures contents are laid out in a row */
+  flex-direction: row;
 }
 
 .timeline-logo-link .logo {
-  max-width: 100%; /* Ensures the logo does not exceed the container width */
-  max-height: 100%; /* Ensures the logo does not exceed the container height */
+  max-width: 100%;
+  max-height: 100%;
   height: auto; /* Maintains aspect ratio */
-  object-fit: contain;
+  object-fit: contain; /* Ensures image fits the height of the content */
 }
 
 .detail-box .details {
   flex: 1 1 auto; /* Take up remaining space */
-  padding: 0 10px; /* Padding on the left and right inside the details box */
+  padding: 0 10px;
 }
 
 .timeline-event.education:hover .detail-box {

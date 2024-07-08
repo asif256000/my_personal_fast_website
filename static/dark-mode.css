@@ -69,3 +69,8 @@
 .dark-mode .timeline-event::before {
   color: #ddd;
 }
+
+.dark-mode .detail-box {
+  background-color: #555;
+  color: #ddd;
+}
