@@ -214,6 +214,7 @@ nav ul li a.active {
   bottom: 10vh;
 }
 
+/* Timeline styles */
 .timeline {
   position: relative;
   margin: 0 auto;
@@ -223,11 +224,11 @@ nav ul li a.active {
   position: absolute;
   left: calc(50%);
   width: 2px;
-  background-color: #888;
+  background-color: #444;
 }
 
 .timeline-line.dotted {
-  border-left: 2px dotted #888;
+  border-left: 2px dotted #444;
   background: none;
 }
 
@@ -235,49 +236,48 @@ nav ul li a.active {
   position: absolute;
   left: calc(50%);
   transform: translate(-50%) translateY(-50%);
-  color: #888;
-  text-shadow: #444;
+  color: #444;
+  text-shadow: #111;
   font-size: 14px;
 }
 
 .timeline-event {
   position: absolute;
   display: flex;
-  /* justify-content: center; Center-align content horizontally */
-  align-items: center; /* Center-align content vertically */
-  width: 42%; /* Reduced width for margin on the sides */
+  align-items: center;
+  width: 42%;
   box-sizing: border-box;
-  margin: 0 3%; /* Add margin to create space on sides */
+  margin: 0 3%;
   border-radius: 10px;
   border: #000 solid 2px;
 }
 
 .timeline-event.education {
   left: 0;
-  background-color: #aaa;
+  background-color: rgba(150, 150, 150, 0.4);
   text-align: left;
+  box-shadow: 0 0 5px white;
 }
 
 .timeline-event.experience {
   right: 0;
-  background-color: #888;
+  background-color: rgba(100, 100, 100, 0.4);
   text-align: right;
+  box-shadow: 0 0 5px white;
 }
 
 .timeline-event .content {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  color: white;
   width: 100%;
-  /* max-height: 100%; */
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .timeline-event .content h3,
 .timeline-event .content p {
-  margin: 2px 0; /* Reduced gap between h3 and p */
+  margin: 2px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
@@ -285,19 +285,19 @@ nav ul li a.active {
 }
 
 .timeline-event::before {
-  content: attr(data-start); /* Display the start date */
+  content: attr(data-start);
   position: absolute;
   top: 5px;
-  color: #ddd;
+  color: #444;
   font-size: 12px;
 }
 
 .timeline-event::after {
-  content: attr(data-end); /* Display the end date */
+  content: attr(data-end);
   position: absolute;
   bottom: 5px;
-  color: #ddd; /* White color for better visibility */
-  font-size: 12px; /* Maintain a consistent font size */
+  color: #444;
+  font-size: 12px;
 }
 
 .timeline-event.education::before,
@@ -326,7 +326,7 @@ nav ul li a.active {
   padding: 10px 20px; /* Add some padding inside the box */
   border: 2px solid black; /* Black border */
   background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-  box-shadow: 0 0 10px white; /* White shadow */
+  box-shadow: 0 0 10px white;
   border-radius: 10px; /* Optional: add some border radius for rounded corners */
   margin: 0; /* Remove default margin */
 }

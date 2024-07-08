@@ -47,3 +47,25 @@
   display: flex;
   align-items: center;
 }
+
+/* Dark Mode Timeline styles */
+.dark-mode .timeline-line {
+  background-color: #ddd;
+}
+
+.dark-mode .timeline-line.dotted {
+  border-left: 2px dotted #ddd;
+  background: none;
+}
+
+.dark-mode .year-marker {
+  color: #ddd;
+}
+
+.dark-mode .timeline-event::after {
+  color: #ddd;
+}
+
+.dark-mode .timeline-event::before {
+  color: #ddd;
+}
