@@ -62,6 +62,14 @@
   color: #ddd;
 }
 
+.dark-mode .timeline-event {
+  box-shadow: 0 0 5px #ddd;
+}
+
+.dark-mode .timeline-heading h3 {
+  box-shadow: 0 0 10px #ddd;
+}
+
 .dark-mode .timeline-event::after {
   color: #ddd;
 }
