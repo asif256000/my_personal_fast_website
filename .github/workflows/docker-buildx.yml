@@ -6,11 +6,6 @@ on:
       - main # Trigger the workflow on pushes to the main branch
   workflow_dispatch: # Allow manual triggering of the workflow
 
-permissions:
-  contents: read
-  actions: write
-  id-token: write
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -57,8 +52,9 @@ jobs:
       #     DOCKER_BUILDKIT: 1 # Enable BuildKit for efficient builds
 
       # Step 5: Update the version variable in GitHub Secrets and Variables
-      - name: Update version variable
+      - name: Set new version variable
         run: |
+          gh auth login --with-token <<< "${{ secrets.PAT_TOKEN }}"
           gh variable set WEBSITE_DOCKER_IMAGE_VERSION --body "${{ env.NEW_VERSION }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
