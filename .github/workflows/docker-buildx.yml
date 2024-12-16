@@ -14,7 +14,7 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       DOCKER_IMAGE_VERSION: ${{ vars.WEBSITE_DOCKER_IMAGE_VERSION }}
-      DOCKER_REPO: asifdocker23/fast_website
+      DOCKER_REPO: fast_website
 
     steps:
       # Step 1: Check out the repository
@@ -32,22 +32,24 @@ jobs:
       - name: Update minor version
         id: update_version
         run: |
+          echo ${{ env.DOCKER_IMAGE_VERSION }}
           MINOR_VERSION=$(echo ${{ env.DOCKER_IMAGE_VERSION }} | awk -F. '{print $2}')
           NEW_MINOR_VERSION=$((MINOR_VERSION + 1))
           NEW_VERSION=$(echo ${{ env.DOCKER_IMAGE_VERSION }} | sed "s/\.[0-9]*$/.${NEW_MINOR_VERSION}/")
-          echo "::set-output name=new_version::${NEW_VERSION}"
+          echo $NEW_VERSION
+          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
       # Step 4: Build and push the Docker image using buildx
-      - name: Build and push Docker image
-        run: |
-          docker buildx build \
-            --platform linux/amd64 \
-            --push \
-            -t ${{ env.DOCKER_REPO }}:latest \
-            -t ${{ env.DOCKER_REPO }}:${{ env.NEW_VERSION }} \
-            -f src/Dockerfile .
-        env:
-          DOCKER_BUILDKIT: 1 # Enable BuildKit for efficient builds
+      # - name: Build and push Docker image
+      #   run: |
+      #     docker buildx build \
+      #       --platform linux/amd64 \
+      #       --push \
+      #       -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest \
+      #       -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ env.NEW_VERSION }} \
+      #       -f src/Dockerfile .
+      #   env:
+      #     DOCKER_BUILDKIT: 1 # Enable BuildKit for efficient builds
 
       # Step 5: Update the version variable in GitHub Secrets and Variables
       - name: Update version variable
