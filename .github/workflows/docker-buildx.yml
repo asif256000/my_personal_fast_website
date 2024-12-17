@@ -21,14 +21,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Log in to Docker Hub
+      # Step 2: Set up environment variables
+      - name: Set up environment variables
+        run: |
+          echo "DATABASE_URL=${{ secrets.DB_URL }}" >> .env
+
+      # Step 3: Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_ACCESS_TOKEN }}
 
-      # Step 3: Update the minor version of the image version
+      # Step 4: Update the minor version of the image version
       - name: Update minor version
         id: update_version
         run: |
@@ -39,19 +44,18 @@ jobs:
           echo $NEW_VERSION
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
-      # Step 4: Build and push the Docker image using buildx
+      # Step 5: Build and push the Docker image using buildx
       - name: Build and push Docker image
         run: |
           docker buildx build \
             --platform linux/amd64 \
             --push \
-            -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest \
             -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ env.NEW_VERSION }} \
             -f src/Dockerfile .
         env:
           DOCKER_BUILDKIT: 1 # Enable BuildKit for efficient builds
 
-      # Step 5: Update the version variable in GitHub Secrets and Variables
+      # Step 6: Update the version variable in GitHub Secrets and Variables
       - name: Set new version variable
         run: |
           echo "${{ secrets.PAT_TOKEN }}" | gh auth login --with-token
