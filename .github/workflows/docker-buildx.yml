@@ -50,6 +50,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64 \
             --push \
+            -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest \
             -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ env.NEW_VERSION }} \
             -f src/Dockerfile .
         env:
