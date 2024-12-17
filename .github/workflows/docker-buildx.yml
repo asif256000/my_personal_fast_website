@@ -40,16 +40,16 @@ jobs:
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
       # Step 4: Build and push the Docker image using buildx
-      # - name: Build and push Docker image
-      #   run: |
-      #     docker buildx build \
-      #       --platform linux/amd64 \
-      #       --push \
-      #       -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest \
-      #       -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ env.NEW_VERSION }} \
-      #       -f src/Dockerfile .
-      #   env:
-      #     DOCKER_BUILDKIT: 1 # Enable BuildKit for efficient builds
+      - name: Build and push Docker image
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            --push \
+            -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:latest \
+            -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ env.NEW_VERSION }} \
+            -f src/Dockerfile .
+        env:
+          DOCKER_BUILDKIT: 1 # Enable BuildKit for efficient builds
 
       # Step 5: Update the version variable in GitHub Secrets and Variables
       - name: Set new version variable
