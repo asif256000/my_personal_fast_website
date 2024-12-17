@@ -14,7 +14,6 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
       DOCKER_IMAGE_VERSION: ${{ vars.WEBSITE_DOCKER_IMAGE_VERSION }}
-      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       DOCKER_REPO: fast_website
 
     steps:
@@ -55,5 +54,5 @@ jobs:
       # Step 5: Update the version variable in GitHub Secrets and Variables
       - name: Set new version variable
         run: |
-          gh auth login --with-token <<< "${{ env.GITHUB_TOKEN}}"
+          echo "${{ secrets.PAT_TOKEN }}" | gh auth login --with-token
           gh variable set WEBSITE_DOCKER_IMAGE_VERSION --body "${{ env.NEW_VERSION }}"
