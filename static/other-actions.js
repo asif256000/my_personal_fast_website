@@ -28,7 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let start = new Date(startDate);
     start.setDate(15); // Set the date to the middle of the month
-    const end = new Date(endDate);
+    let end;
+    if (endDate != null) {
+      end = new Date(endDate);
+    } else {
+      end = new Date();
+    }
+
     end.setDate(15); // Set the date to the middle of the month
 
     // Update the maximum endYear and corresponding endMonth found so far
