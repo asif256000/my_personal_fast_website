@@ -80,8 +80,29 @@ p {
 
 .logo {
   /* max-width: 50px; Adjust the size as needed */
-  max-width: 100%;
+  aspect-ratio: 1/1; /* Maintain aspect ratio */
+  /* max-width: 100%; */
+  max-width: 5vw;
+  max-height: 5vw;
+  width: auto;
   height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain; /* Ensures image fits the height of the content */
+}
+
+@media (max-width: 768px) {
+  .logo {
+    max-width: 10vw;
+    max-height: 10vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 15vw;
+    max-height: 15vw;
+  }
 }
 
 .social-media-links {
