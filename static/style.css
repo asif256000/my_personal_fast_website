@@ -403,3 +403,40 @@ nav ul li a.active {
 .timeline-event.experience:hover .detail-box {
   flex-direction: row-reverse; /* Logo to the right for experience */
 }
+
+/* Profile Section styles */
+.profile-section {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.profile-image {
+  flex: 0 0 auto;
+  padding: 10px;
+}
+
+.profile-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.profile-info {
+  flex: 1 1 60vw;
+  padding: 10px;
+  text-align: justify;
+  /* max-width: fit-content; */
+}
+
+@media (max-width: 768px) {
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-image,
+  .profile-info {
+    flex: 1 1 100%;
+  }
+}
