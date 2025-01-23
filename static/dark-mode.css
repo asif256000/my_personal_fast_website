@@ -23,6 +23,7 @@
 
 .dark-mode nav ul li a {
   background-color: #555;
+  border: 2px solid #666;
   color: #fff;
 }
 
@@ -31,6 +32,8 @@
 }
 
 .dark-mode nav ul li a.active {
+  background-color: #444;
+  font-weight: bold;
   box-shadow: 0 0 10px #fff;
 }
 
