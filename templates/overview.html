@@ -7,7 +7,7 @@
 {% block content %}
     <div class="main-content">
         <section id="intro">
-            <p>Hi, I am {{ basic_info.name}}, currently residing in {{ basic_info.location }}.
+            <p style="text-align: justify;">Hi, I am {{ basic_info.name}}, currently residing in {{ basic_info.location }}.
             <br>
             You can reach me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a> ,
             or check out my <a href="{{ basic_info.linkedin }}">LinkedIn</a> or <a href="{{ basic_info.github }}">GitHub</a> profiles.</p>
