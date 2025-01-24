@@ -1,10 +1,10 @@
 <nav>
-    <div class="selected-item">&#x25BC; &nbsp; {{ 'Home' if current_page == 'home' else
+    <div class="selected-item">&nbsp; {{ 'Home' if current_page == 'home' else
            'Overview' if current_page == 'overview' else
            'Experience & Education' if current_page == 'experience_education' else
            'Projects & Certifications' if current_page == 'projects_certificates' else
            'Awards & Interests' if current_page == 'awards_interests' else
-           'Resume' }} &nbsp; &#x25BC;</div>
+           'Resume' }} &nbsp;</div>
     <ul>
         <li><a href="{{ url_for('home') }}" class="{{ 'active nav-item' if current_page == 'home' else 'nav-item' }}">Home</a></li>
         <li><a href="{{ url_for('overview') }} " class="{{ 'active nav-item' if current_page == 'overview' else 'nav-item' }}">Overview</a></li>

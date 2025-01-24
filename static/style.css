@@ -218,7 +218,7 @@ nav ul li a {
   background-color: #333;
 }
 
-/* .selected-item::before,
+.selected-item::before,
 .selected-item::after {
   content: "▼";
   position: relative;
@@ -233,11 +233,11 @@ nav ul li a {
   right: -5px;
 }
 
-nav ul.active + .selected-item::before,
-nav ul.active + .selected-item::after {
+.selected-item.expanded::before,
+.selected-item.expanded::after {
   content: "▲";
   transform: rotate(180deg);
-} */
+}
 
 nav ul li a:hover {
   background-color: #444;

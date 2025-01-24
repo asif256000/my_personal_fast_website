@@ -17,15 +17,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle the navbar menu
   function toggleNavbar(event) {
     const selectedItem = event.target.closest(".selected-item");
-    // const nav = selectedItem.closest("nav");
-    // const navMenu = nav.querySelector("ul");
     const navMenu = selectedItem.nextElementSibling;
     const isExpanded = navMenu.classList.toggle("active");
 
     if (isExpanded) {
-      selectedItem.innerHTML = selectedItem.innerHTML.replaceAll("▼", "▲");
+      // selectedItem.innerHTML = selectedItem.innerHTML.replaceAll("▼", "▲");
+      selectedItem.classList.add("expanded");
     } else {
-      selectedItem.innerHTML = selectedItem.innerHTML.replaceAll("▲", "▼");
+      // selectedItem.innerHTML = selectedItem.innerHTML.replaceAll("▲", "▼");
+      selectedItem.classList.remove("expanded");
     }
   }
 
@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .closest("nav")
             .querySelector(".selected-item");
           associatedSelectedItem.innerHTML =
-            associatedSelectedItem.innerHTML.replaceAll("▲", "▼");
+            // associatedSelectedItem.innerHTML.replaceAll("▲", "▼");
+            associatedSelectedItem.classList.remove("expanded");
         }
       });
     }
