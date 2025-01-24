@@ -9,7 +9,7 @@
         <section id="honors_and_awards">
             <h2>Honors and Awards</h2>
             <table>
-            <tbody>
+            <tbody class="equal-two-cols">
                 {% for hna in honors_and_awards %}
                     <tr style="padding: 10px;">
                     <td style="padding: 10px; max-width: 25vw"><b>{{ hna.title }}</b></td>
@@ -24,7 +24,7 @@
         <section id="interests">
             <h2>Interests</h2>
             <table>
-            <tbody>
+            <tbody class="two-cols">
                 {% for int_subcategory, ints in interests.items() %}
                     {% set cat_ints = ", ".join(ints) %}
                     <tr style="padding: 10px;">

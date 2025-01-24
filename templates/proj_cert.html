@@ -9,7 +9,7 @@
         <section id="projects">
             <h2>Projects</h2>
             <table>
-            <tbody>
+            <tbody class="three-cols">
                 {% for proj in projects %}
                     <tr style="padding: 10px;">
                     <td style="padding: 10px; max-width: 20vw;">{{ proj.title }}</td>
@@ -29,7 +29,7 @@
         <section id="certifications">
             <h2>Certifications</h2>
             <table>
-            <tbody>
+            <tbody class="three-cols">
                 {% for cert in certifications %}
                     <tr style="padding: 10px;">
                     <td style="padding: 10px; max-width: 20vw;"><b>{{ cert.title }}</b> issued by {{ cert.issuer }}</td>

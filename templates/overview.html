@@ -74,7 +74,7 @@
         <section id="skills">
             <h2 style="margin: 0;">Proficient Skills</h2>
             <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody>
+            <tbody class="two-cols">
                 {% for skill_category, all_skills in skills.items() %}
                     {% set adv_skills = ", ".join(all_skills.get("Advanced", [])) %}
                     {% set int_skills = ", ".join(all_skills.get("Intermediate", [])) %}
@@ -98,14 +98,14 @@
         <section id="projects">
             <h2>Projects</h2>
             <table style="border-spacing: 0; border-collapse: collapse;">
-                <tbody>
+                <tbody class="equal-two-cols">
                     {% for proj in projects %}
                         <tr>
-                            <td style="padding: 5px;">{{ proj.title }}</td>
+                            <td style="padding: 5px; max-width: 30vw;">{{ proj.title }}</td>
                             {% if proj.link %}
-                                <td style="padding: 5px;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                                <td style="padding: 5px; max-width: 50vw; word-wrap: break-word; word-break: break-all; overflow-wrap: break-word;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
                             {% else %}
-                                <td style="padding: 5px;">For details, go to <a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a> page...</td>
+                                <td style="padding: 5px; max-width: 50vw;">For details, go to <a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a> page...</td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -117,14 +117,14 @@
         <section id="certifications">
             <h2 style="margin: 0;">Certifications</h2>
             <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody>
+            <tbody class="inverted-two-cols">
                 {% for cert in certifications %}
                     <tr style="padding: 2px;">
                     <td style="padding: 2px; max-width: 55vw;"><b>{{ cert.title }}</b> by {{ cert.issuer }}</td>
                     {% if cert.link %}
                         <td style="padding: 2px; max-width: 35vw;"><p><a href="{{ cert.link }}">Certificate</a> received on <b>{{ cert.achievement_date.strftime("%Y-%b") }}</b></p></td>
                     {% else %}
-                        <td style="padding: 2px; max-width: 35vw;"></td>
+                        <td style="padding: 2px; max-width: 35vw;">TBD</td>
                     {% endif %}
                     </tr>
                 {% endfor %}
@@ -136,7 +136,7 @@
         <section id="honors_and_awards">
             <h2>Honors and Awards</h2>
             <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody>
+            <tbody class="equal-two-cols">
                 {% for hna in honors_and_awards %}
                     <tr style="padding: 2px;">
                     <td style="padding: 2px; max-width: 30vw"><b>{{ hna.title }}</b></td>
@@ -151,7 +151,7 @@
         <section id="interests">
             <h2 style="margin: 0;">Interests</h2>
             <table>
-            <tbody>
+            <tbody class="two-cols">
                 {% for int_subcategory, ints in interests.items() %}
                     {% set cat_ints = ", ".join(ints) %}
                     <tr style="padding: 10px;">
