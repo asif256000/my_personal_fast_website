@@ -13,7 +13,7 @@
                 {% for proj in projects %}
                     <tr style="padding: 10px;">
                     <td style="padding: 10px; max-width: 20vw;">{{ proj.title }}</td>
-                    <td style="padding: 10px; max-width: 40vw;"><p style="text-align: justify;">{{ proj.description }}</p></td>
+                    <td style="padding: 10px; max-width: 40vw;"><p>{{ proj.description }}</p></td>
                     {% if proj.link %}
                         <td style="padding: 10px; max-width: 20vw; overflow-wrap: break-word;">Link: <a href="{{ proj.link }}">{{ proj.link }}</a></td>
                     {% else %}
