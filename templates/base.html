@@ -10,11 +10,12 @@
     <script src="{{ url_for('static', path='/scroll-functions.js') }}"></script>
     <script src="{{ url_for('static', path='/other-actions.js') }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head_scripts %}{% endblock %}
 </head>
 
 <body>
-    <button id="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
-    <button id="scroll-to-bottom" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })">↓</button>
+    <button id="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">▲</button>
+    <button id="scroll-to-bottom" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })">▼</button>
 
     <div class="dark-mode-toggle">
         <p id="toggle-text"></p>
@@ -26,27 +27,28 @@
     </div>
 
     <div id="wrapper">
-        {# <div class="content"> #}
             <h1>
-            <div style="display: inline-block; vertical-align: middle;">
-                <a href="{{ url_for('home') }}">
-                    <img src="{{ url_for('static', path='logos/profile_logo.png') }}" alt="Logo" style="width: 50px;">
-                </a>
-            </div>
-            <div style="display: inline-block; vertical-align: middle;">
-            {% block heading %}
-                Profile
-            {% endblock %}
-            </div>
+                <div style="display: inline-block; vertical-align: middle;">
+                    <a href="{{ url_for('home') }}">
+                        <img src="{{ url_for('static', path='logos/profile_logo.png') }}" alt="Logo" style="width: 50px;">
+                    </a>
+                </div>
+                <div style="display: inline-block; vertical-align: middle;">
+                {% block heading %}
+                    Profile
+                {% endblock %}
+                </div>
             </h1>
             {% include "navbar.html" %}
-            {% block content %}
-            {% endblock %}
+                {% block content %}
+                {% endblock %}
             {% include "navbar.html" %}
             <hr>
-        {# </div> #}
     </div>
     {% include "footer.html" %}
+
+    {% block scripts %}
+    {% endblock %}
     
 </body>
 </html>
