@@ -198,16 +198,46 @@ nav ul li {
   text-align: center;
 }
 
-nav ul li a {
+nav ul li a,
+.selected-item {
   display: block;
   text-align: center;
   padding: 10px;
   text-decoration: none;
   box-sizing: border-box;
   border: 2px solid #777;
-  background-color: #666;
   color: #fff;
 }
+
+nav ul li a {
+  background-color: #666;
+}
+
+.selected-item {
+  display: none;
+  background-color: #333;
+}
+
+/* .selected-item::before,
+.selected-item::after {
+  content: "▼";
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.selected-item::before {
+  left: -5px;
+}
+
+.selected-item::after {
+  right: -5px;
+}
+
+nav ul.active + .selected-item::before,
+nav ul.active + .selected-item::after {
+  content: "▲";
+  transform: rotate(180deg);
+} */
 
 nav ul li a:hover {
   background-color: #444;
@@ -217,6 +247,59 @@ nav ul li a.active {
   background-color: #444;
   font-weight: bold;
   box-shadow: 0 0 10px #000;
+}
+
+.navbar-toggler {
+  display: none; /* Hidden on larger screens */
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  /* background-color: #e6e5e5; */
+  border: 2px solid #666;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-toggler:hover {
+  background-color: #ddd; /* Slightly darker gray on hover */
+  color: #000; /* Darker text on hover */
+}
+
+.navbar-toggler:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a focus shadow for accessibility */
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none; /* Hide the navigation items initially */
+    flex-direction: column;
+    width: 100%;
+    background-color: #444; /* Optional: Background for the dropdown */
+  }
+
+  nav ul.active {
+    display: flex; /* Show the nav items when toggled */
+  }
+
+  nav ul li {
+    margin: 0; /* Remove horizontal margin */
+    text-align: center;
+  }
+
+  .navbar-toggler {
+    display: block; /* Show the hamburger menu icon */
+  }
+
+  .selected-item {
+    display: block;
+  }
+
+  /* Hide selected-item when navbar menu is active */
+  nav ul.active + .selected-item {
+    display: none; /* Hides the selected-item */
+  }
 }
 
 /* Scroll to top and bottom buttons */

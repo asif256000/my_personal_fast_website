@@ -27,6 +27,10 @@
   color: #fff;
 }
 
+.dark-mode .selected-item {
+  background-color: #777;
+}
+
 .dark-mode nav ul li a:hover {
   background-color: #444;
 }

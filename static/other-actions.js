@@ -12,6 +12,63 @@ window.onload = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  const allSelectedItems = document.querySelectorAll(".selected-item");
+
+  // Toggle the navbar menu
+  function toggleNavbar(event) {
+    const selectedItem = event.target.closest(".selected-item");
+    // const nav = selectedItem.closest("nav");
+    // const navMenu = nav.querySelector("ul");
+    const navMenu = selectedItem.nextElementSibling;
+    const isExpanded = navMenu.classList.toggle("active");
+
+    if (isExpanded) {
+      selectedItem.innerHTML = selectedItem.innerHTML.replaceAll("▼", "▲");
+    } else {
+      selectedItem.innerHTML = selectedItem.innerHTML.replaceAll("▲", "▼");
+    }
+  }
+
+  // Collapse all navbars when clicking outside
+  document.addEventListener("click", function (event) {
+    const allNavMenus = document.querySelectorAll("nav ul");
+    let clickedInside = false;
+
+    // Check if the click happened inside any nav
+    allNavMenus.forEach((navMenu) => {
+      if (navMenu.contains(event.target)) {
+        clickedInside = true;
+      }
+    });
+
+    allSelectedItems.forEach((selectedItem) => {
+      if (selectedItem.contains(event.target)) {
+        clickedInside = true;
+      }
+    });
+
+    if (!clickedInside) {
+      allNavMenus.forEach((navMenu) => {
+        if (navMenu.classList.contains("active")) {
+          navMenu.classList.remove("active");
+          const associatedSelectedItem = navMenu
+            .closest("nav")
+            .querySelector(".selected-item");
+          associatedSelectedItem.innerHTML =
+            associatedSelectedItem.innerHTML.replaceAll("▲", "▼");
+        }
+      });
+    }
+  });
+
+  // Attach the toggleNavbar function to the selected items
+  allSelectedItems.forEach((selectedItem) => {
+    selectedItem.addEventListener("click", toggleNavbar);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Update the timeline event positions
   const timelineEvents = document.querySelectorAll(".timeline-event");
   const timelineContainer = document.querySelector(".timeline");
 
