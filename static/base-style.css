@@ -55,9 +55,7 @@ p {
 }
 
 .logo {
-  /* max-width: 50px; Adjust the size as needed */
   aspect-ratio: 1/1; /* Maintain aspect ratio */
-  /* max-width: 100%; */
   max-width: 5vw;
   max-height: 5vw;
   width: auto;
@@ -126,5 +124,4 @@ p {
   flex: 1 1 60vw;
   padding: 10px;
   text-align: justify;
-  /* max-width: fit-content; */
 }
