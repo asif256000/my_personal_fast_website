@@ -1,0 +1,43 @@
+## For the branch `my_blog`:
+
+- [ ] Create a separate route for maintenance (admin) page.
+- [ ] Add a login form to the maintenance page.
+  - [ ] The login form should have a username and password field.
+  - [ ] The login form should have a login button.
+- [ ] Add a logout button to the maintenance page.
+- [ ] Every page under the maintenance route should be protected by a login.
+- [ ] Ideas for forms in the maintenance page:
+  - [ ] Add a new blog post form.
+  - [ ] Edit a blog post form.
+  - [ ] Delete a blog post form.
+  - [ ] Delete a comment.
+  - [ ] Edit my details.
+  - [ ] Edit my education.
+  - [ ] Edit my experience.
+  - [ ] Edit my skills.
+  - [ ] Edit my projects.
+  - [ ] Edit my contact details.
+  - [ ] Edit my social media links.
+  - [ ] Edit my profile picture.
+  - [ ] Edit my resume.
+  - [ ] Edit my certificates.
+  - [ ] Edit my awards.
+  - [ ] Edit my interests.
+- [ ] Create a separate route for the blog page.
+- [ ] New DB model for blog posts.
+  - [ ] Columns: title, date, short description, content, images(optional).
+- [ ] Create a separate route for the blog post page.
+- [ ] Add Blog page to the navigation bar.
+- [ ] Blog page:
+  - [ ] It should be populated with the blog posts from database.
+  - [ ] Each post should have a title, date, and a short description, and possibly an image.
+  - [ ] Each post should be clickable to view the full post.
+  - [ ] Maybe also redirect to external blog accounts.
+- [ ] Pagination for the blog page.
+- [ ] Blog post page:
+  - [ ] It should display the full post.
+  - [ ] The images should be displayed if available.
+  - [ ] It should have a back button to go back to the blog page.
+- [ ] Add a comment section to the blog post page.
+  - [ ] Validation or rate limiting for comments to prevent spam.
+  - [ ] Comments should be stored in the database.
