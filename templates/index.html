@@ -7,64 +7,64 @@
 {% block content %}
     <div class="main-content">
         <section id="intro">
-        <table>
-        <tr>
-        <td style="padding: 10px; width: 20vw;">
-            <a target="_self" href="{{ url_for('overview') }}" class="image-link">
-                <img src="{{ url_for('static', path='image.jpg') }}" alt="{{ basic_info.name }}">
-            </a>
-        </td>
-        <td style="padding: 10px;"><p>Hi there, I am {{ basic_info.name}}, currently living in {{ basic_info.location }}.
-            You can email me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or call/ text at <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a>.
-            Thank you for visiting <a href="https://github.com/asif256000/my_personal_fast_website">my website</a>, but don't forget to check out my <a href="{{ basic_info.github }}">GitHub</a> 
-            and <a href="{{ basic_info.linkedin }}">LinkedIn</a> profiles.
-            <br><br>
-            Feel free to navigate to other pages in my profile to learn more about me. 
-            Or if you do not have enough time, you can go to the <a href="{{ url_for('overview') }}">overview page</a> to see a summary of my profile.
-            <br><br>
-            {{ basic_info.intro|safe }}
-            </p></td>
-        </tr>
-        </table>
+            <div class="profile-section">
+                <div class="profile-image">
+                    <a target="_self" href="{{ url_for('overview') }}" class="image-link">
+                        <img src="{{ url_for('static', path='image.jpg') }}" alt="{{ basic_info.name }}">
+                    </a>
+                </div>
+                <div class="profile-info">
+                    <p>Hi there, I am {{ basic_info.name}}, currently living in {{ basic_info.location }}.
+                        You can email me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or call/ text at <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a>.
+                        Thank you for visiting <a href="https://github.com/asif256000/my_personal_fast_website">my website</a>, but don't forget to check out my <a href="{{ basic_info.github }}">GitHub</a> 
+                        and <a href="{{ basic_info.linkedin }}">LinkedIn</a> profiles.
+                        <br><br>
+                        Feel free to navigate to other pages in my profile to learn more about me. 
+                        Or if you do not have enough time, you can go to the <a href="{{ url_for('overview') }}">overview page</a> to see a summary of my profile.
+                        <br><br>
+                        {{ basic_info.intro|safe }}
+                    </p>
+                </div>
+            </div>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="skills">
             <h2>Skills</h2>
-            <table style="border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th colspan="2" style="text-align: left; font-weight: normal; font-size: xx-small;">*in decreasing order of proficiency for each category...</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for skill_category, all_skills in skills.items() %}
-                    {% set adv_skills = ", ".join(all_skills.get("Advanced", [])) %}
-                    {% set int_skills = ", ".join(all_skills.get("Intermediate", [])) %}
-                    {% set beg_skills = ", ".join(all_skills.get("Beginner", [])) %}
+                <table>
+                <thead>
                     <tr>
-                        <td style="padding-right: 10px; {% if not loop.last %}border-bottom: 1px solid #555;{% endif %}"><b>{{ skill_category }}</b></td>
-                        <td style="padding-left: 10px; max-width: 75vw;">
-                            <p style="opacity: 1;">{{ adv_skills }}</p>
-                            <p style="opacity: 0.75;">{{ int_skills }}</p>
-                            <p style="opacity: 0.5;">{{ beg_skills }}</p>
-                        </td>
+                        <th colspan="2" style="text-align: left; font-weight: normal; font-size: xx-small; margin: 5px;">*in decreasing order of proficiency for each category...</th>
                     </tr>
-                {% endfor %}
-            </tbody>
+                </thead>
+                <tbody class="two-cols">
+                    {% for skill_category, all_skills in skills.items() %}
+                        {% set adv_skills = ", ".join(all_skills.get("Advanced", [])) %}
+                        {% set int_skills = ", ".join(all_skills.get("Intermediate", [])) %}
+                        {% set beg_skills = ", ".join(all_skills.get("Beginner", [])) %}
+                        <tr>
+                            <td style="{% if not loop.last %}border-bottom: 1px solid #555;{% endif %}"><b>{{ skill_category }}</b></td>
+                            <td>
+                                <p style="opacity: 1; margin: 5px;">{{ adv_skills }}</p>
+                                <p style="opacity: 0.75; margin: 5px;">{{ int_skills }}</p>
+                                <p style="opacity: 0.5; margin: 5px;">{{ beg_skills }}</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider" style="max-width: 70vw;">
         
         <section id="resume">
             <h2>Resume</h2>
             {% set resume_path = resume[0].file_path %}
             <a href="{{ url_for('static', path=resume_path) }}" download class="download-link">Resume</a>
             <br>
-            <object data="{{ url_for('static', path= resume_path ) }}" type="application/pdf" style="width: 70vw; height: 1000px;">
+            <object class="resume-container" data="{{ url_for('static', path= resume_path ) }}" type="application/pdf">
                 <embed src="{{ url_for('static', path= resume_path ) }}" type="application/pdf">
             </object>
         </section>
-        <hr style="max-width: 70vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider" style="max-width: 70vw;">
     </div>
 {% endblock %}

@@ -9,24 +9,24 @@
         <section id="experience">
             <h2>Experience</h2>
             <table>
-            <tbody>
+            <tbody class="detailed-two-cols">
                 {% for exp in experience %}
-                    <tr style="padding: 10px;">
-                    <td style="padding: 10px; width: 10vw;">
+                    <tr>
+                    <td>
                     <a href="{{ exp.company_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + exp.company_logo) }}" alt="{{ exp.company }}"></td></a>
-                    <td style="padding: 10px; max-width: 75vw;">
+                    <td>
                     <p>Work{{ ("ed" if exp.duration_end else "ing") }} at <b style="font-size: large;">{{ exp.company }}</b> at <i>{{ exp.location }}</i> as a <b style="font-size: x-large;">{{ exp.title }}</b> 
                     from <b>{{ exp.duration_start.strftime("%Y-%b-%d") }}</b>{{ (" till <b>" + exp.duration_end.strftime("%Y-%b-%d") + "</b>" if exp.duration_end else "") | safe }}.</p></td>
                     </tr>
                     {% if exp.tech_stack %}
-                        <tr style="padding: 10px;">
-                        <td style="padding: 10px; width: 10vw;">Technologies Used:</td>
-                        <td style="padding: 10px; max-width: 80vw;"><p>{{ exp.tech_stack }}</p></td>
+                        <tr>
+                        <td>Tech Stack Used:</td>
+                        <td><p>{{ exp.tech_stack }}</p></td>
                         </tr>
                     {% endif %}
-                    <tr style="padding: 10px;">
-                    <td style="padding: 10px; width: 10vw; {% if not loop.last %}border-bottom: 1px solid #555;{% endif %}">Achievements &<br>Responsibilities:</td>
-                    <td style="padding: 10px; max-width: 80vw;">
+                    <tr>
+                    <td style="{% if not loop.last %}border-bottom: 1px solid #555;{% endif %}">Highlights:</td>
+                    <td class="justify-text">
                     <p>
                     {% for resp_head, resp_desc in exp.description %}
                         &bull; <b>{{ resp_head}}: </b> {{ resp_desc }}
@@ -46,30 +46,30 @@
             </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="education">
             <h2>Education</h2>
             <table>
-            <tbody>
+            <tbody class="detailed-two-cols">
                 {% for edu in education %}
-                    <tr style="padding: 10px;">
-                    <td style="padding: 10px; width: 10vw;">
+                    <tr>
+                    <td>
                         <a href="{{ edu.institution_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}"></a>
                     </td>
-                    <td style="padding: 10px; max-width: 80vw;"><p>Stud{{ "ied" if edu.duration_end < curr_date else "ying" }} at <b>{{ edu.institution }}</b> located at <i>{{ edu.location }}</i>. <b>{{ edu. degree }}</b> in <b>{{ edu.major }}</b>
+                    <td><p>Stud{{ "ied" if edu.duration_end < curr_date else "ying" }} at <b>{{ edu.institution }}</b> located at <i>{{ edu.location }}</i>. <b>{{ edu. degree }}</b> in <b>{{ edu.major }}</b>
                     {{ (" with specialization in <i>" + edu.minor + "</i>" if edu.minor else "") | safe }} from <b>{{ edu.duration_start.strftime("%Y-%b-%d") }}</b> to 
                     <b>{{ edu.duration_end.strftime("%Y-%b-%d") if edu.duration_end < curr_date else edu.duration_end.strftime("%Y-%b-%d")+" (Expected)" }}</b>.<br>
                     {{ "Final grade" if edu.duration_end < curr_date else "Grade so far"}} is <b>{{ edu.gpa }}</b>.</p></td>
                     </tr>
-                    <tr style="padding: 10px;">
-                    <td style="padding: 10px; width: 10vw; {% if not loop.last %}border-bottom: 1px solid #555;{% endif %}">Major courses:</td>
-                    <td style="padding: 10px; max-width: 80vw;"><p>{{ edu.courses }}</p></td>
+                    <tr>
+                    <td style="{% if not loop.last %}border-bottom: 1px solid #555;{% endif %}">Major courses:</td>
+                    <td><p>{{ edu.courses }}</p></td>
                     </tr>
                 {% endfor %}
             </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
     </div>
 {% endblock %}
