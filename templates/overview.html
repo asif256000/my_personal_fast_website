@@ -8,15 +8,15 @@
     <div class="main-content">
         <section id="intro">
             <p style="text-align: justify;">Hi, I am {{ basic_info.name}}, currently residing in {{ basic_info.location }}.
-            <br>
+            <br><br>
             You can reach me at <a href="mailto:"+{{ basic_info.email }}>{{ basic_info.email }}</a> or <a href="tel:"+{{ basic_info.phone }}>{{ basic_info.phone }}</a> ,
             or check out my <a href="{{ basic_info.linkedin }}">LinkedIn</a> or <a href="{{ basic_info.github }}">GitHub</a> profiles.</p>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="timeline">
-        <h2 style="margin: 0;">My Timeline</h2>
-        <p style="font-size: small; margin: 0;">* Hover for details</p>
+        <h2>My Timeline</h2>
+        <p style="font-size: small; margin: 5px;">* Hover/Click for details</p>
             <div class="timeline">
                 <div class="timeline-heading left-heading"><h3>Education</h3></div>
                 <div class="timeline-heading right-heading"><h3>Experiences</h3></div>
@@ -69,19 +69,19 @@
                 
             </div>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="skills">
-            <h2 style="margin: 0;">Proficient Skills</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody class="two-cols">
+            <h2>Proficient Skills</h2>
+            <table>
+            <tbody class="two-cols dense-table">
                 {% for skill_category, all_skills in skills.items() %}
                     {% set adv_skills = ", ".join(all_skills.get("Advanced", [])) %}
                     {% set int_skills = ", ".join(all_skills.get("Intermediate", [])) %}
                     <tr>
-                        <td style="padding-right: 5px;"><b>{{ skill_category }}</b></td>
-                        <td style="padding-left: 5px; max-width: 75vw;">
-                            <p>
+                        <td><b>{{ skill_category }}</b></td>
+                        <td>
+                            <p style="margin: 5px;">
                                 <span style="opacity: 1;">{{ adv_skills }}</span>
                                 {% if int_skills %}
                                     <span style="opacity: 0.6;">| {{ int_skills }}</span>
@@ -93,80 +93,80 @@
             </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="projects">
             <h2>Projects</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-                <tbody class="equal-two-cols">
+            <table>
+                <tbody class="equal-two-cols dense-table">
                     {% for proj in projects %}
                         <tr>
-                            <td style="padding: 5px; max-width: 30vw;">{{ proj.title }}</td>
+                            <td>{{ proj.title }}</td>
                             {% if proj.link %}
-                                <td style="padding: 5px; max-width: 50vw; word-wrap: break-word; word-break: break-all; overflow-wrap: break-word;"><a href="{{ proj.link }}">{{ proj.link }}</a></td>
+                                <td><a href="{{ proj.link }}">{{ proj.link }}</a></td>
                             {% else %}
-                                <td style="padding: 5px; max-width: 50vw;">For details, go to <a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a> page...</td>
+                                <td>For details, go to <a href="{{ url_for('projects_certificates') }}">Projects & Certifications</a> page...</td>
                             {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="certifications">
-            <h2 style="margin: 0;">Certifications</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody class="inverted-two-cols">
+            <h2>Certifications</h2>
+            <table>
+            <tbody class="inverted-two-cols dense-table">
                 {% for cert in certifications %}
-                    <tr style="padding: 2px;">
-                    <td style="padding: 2px; max-width: 55vw;"><b>{{ cert.title }}</b> by {{ cert.issuer }}</td>
+                    <tr>
+                    <td><b>{{ cert.title }}</b> by {{ cert.issuer }}</td>
                     {% if cert.link %}
-                        <td style="padding: 2px; max-width: 35vw;"><p><a href="{{ cert.link }}">Certificate</a> received on <b>{{ cert.achievement_date.strftime("%Y-%b") }}</b></p></td>
+                        <td><p><a href="{{ cert.link }}">Certificate</a> received on <b>{{ cert.achievement_date.strftime("%Y-%b") }}</b></p></td>
                     {% else %}
-                        <td style="padding: 2px; max-width: 35vw;">TBD</td>
+                        <td>TBD</td>
                     {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="honors_and_awards">
             <h2>Honors and Awards</h2>
-            <table style="border-spacing: 0; border-collapse: collapse;">
-            <tbody class="equal-two-cols">
+            <table>
+            <tbody class="equal-two-cols dense-table">
                 {% for hna in honors_and_awards %}
-                    <tr style="padding: 2px;">
-                    <td style="padding: 2px; max-width: 30vw"><b>{{ hna.title }}</b></td>
-                    <td style="padding: 2px; max-width: 55vw;">{{ hna.description }}</td>
+                    <tr>
+                    <td><b>{{ hna.title }}</b></td>
+                    <td>{{ hna.description }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         <section id="interests">
-            <h2 style="margin: 0;">Interests</h2>
+            <h2>Interests</h2>
             <table>
-            <tbody class="two-cols">
+            <tbody class="two-cols dense-table">
                 {% for int_subcategory, ints in interests.items() %}
                     {% set cat_ints = ", ".join(ints) %}
-                    <tr style="padding: 10px;">
-                    <td style="padding: 10px;"><b>{{ int_subcategory }}</b></td>
-                    <td style="padding: 10px; max-width: 70vw;">{{ cat_ints }}</td>
+                    <tr>
+                    <td><b>{{ int_subcategory }}</b></td>
+                    <td>{{ cat_ints }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
             </table>
         </section>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
         {% set resume_path = resume[0].file_path %}
         <a href="{{ url_for('static', path=resume_path) }}" download class="download-link" style="width: 50vw;">Resume</a>
-        <hr style="max-width: 50vw; margin-left: 0; opacity: 0.5;">
+        <hr class="section-divider">
 
     </div>
 {% endblock %}

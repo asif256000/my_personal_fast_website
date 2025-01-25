@@ -27,6 +27,12 @@ h2 {
   font-size: 1.5rem;
 }
 
+.section-divider {
+  max-width: 50vw;
+  margin-left: 0;
+  opacity: 0.5;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -182,24 +188,53 @@ label {
   display: inline-block;
 }
 
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
 /* Styles for two-cols table */
 .two-cols td {
   max-width: 20vw;
-  padding: 2vw;
+  padding: 5px;
 }
 
 .two-cols td:nth-child(2) {
   max-width: 60vw;
 }
 
+.two-cols tr,
+.detailed-two-cols tr,
+.equal-two-cols tr,
+.inverted-two-cols tr,
+.three-cols tr {
+  padding: 10px;
+}
+
+.dense-table tr {
+  padding: 0px;
+}
+
+.detailed-two-cols td {
+  padding: 5px;
+}
+
+.detailed-two-cols td:first-child {
+  width: 15vw;
+}
+
+.detailed-two-cols td:nth-child(2) {
+  max-width: 75vw;
+}
+
 .equal-two-cols td {
   max-width: 40vw;
-  padding: 2vw;
+  padding: 5px;
 }
 
 .inverted-two-cols td {
   max-width: 60vw;
-  padding: 2vw;
+  padding: 5px;
 }
 
 .inverted-two-cols td:nth-child(2) {
@@ -209,7 +244,7 @@ label {
 /* Styles for three-cols table */
 .three-cols td {
   max-width: 15vw;
-  padding: 2vw;
+  padding: 5px;
 }
 
 .three-cols td:nth-child(2) {
@@ -222,8 +257,13 @@ label {
 
 td {
   word-wrap: break-word;
-  word-break: break-all;
-  overflow-wrap: break-word;
+  /* word-break: break-all; */
+  /* overflow-wrap: break-word; */
+}
+
+.resume-container {
+  width: 70vw;
+  height: 80vh;
 }
 
 /* Navigation Bar styles */
