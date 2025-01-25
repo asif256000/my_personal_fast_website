@@ -13,7 +13,7 @@
                 {% for proj in projects %}
                     <tr>
                     <td>{{ proj.title }}</td>
-                    <td style="text-align: justify;"><p>{{ proj.description }}</p></td>
+                    <td><p class="justify-text">{{ proj.description }}</p></td>
                     {% if proj.link %}
                         <td>Link: <a href="{{ proj.link }}">{{ proj.link }}</a></td>
                     {% else %}
@@ -33,7 +33,7 @@
                 {% for cert in certifications %}
                     <tr>
                     <td><b>{{ cert.title }}</b> issued by {{ cert.issuer }}</td>
-                    <td style="text-align: justify;"><p>{{ cert.description }}</p></td>
+                    <td><p class="justify-text">{{ cert.description }}</p></td>
                     {% if cert.link %}
                         <td><p><a href="{{ cert.link }}">Certificate</a> earned on <b>{{ cert.achievement_date.strftime("%Y-%m-%d") }}</b></p></td>
                     {% else %}

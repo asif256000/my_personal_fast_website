@@ -26,7 +26,7 @@
                     {% endif %}
                     <tr>
                     <td style="{% if not loop.last %}border-bottom: 1px solid #555;{% endif %}">Highlights:</td>
-                    <td style="text-align: justify;">
+                    <td class="justify-text">
                     <p>
                     {% for resp_head, resp_desc in exp.description %}
                         &bull; <b>{{ resp_head}}: </b> {{ resp_desc }}
