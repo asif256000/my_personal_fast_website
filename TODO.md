@@ -41,3 +41,4 @@
 - [ ] Add a comment section to the blog post page.
   - [ ] Validation or rate limiting for comments to prevent spam.
   - [ ] Comments should be stored in the database.
+- [ ] Add meta description and aria tags to all pages.
