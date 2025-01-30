@@ -13,7 +13,7 @@
                 {% for exp in experience %}
                     <tr>
                     <td>
-                    <a href="{{ exp.company_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + exp.company_logo) }}" alt="{{ exp.company }}"></td></a>
+                    <a href="{{ exp.company_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + exp.company_logo + '.webp') }}" alt="{{ exp.company }}"></td></a>
                     <td>
                     <p>Work{{ ("ed" if exp.duration_end else "ing") }} at <b style="font-size: large;">{{ exp.company }}</b> at <i>{{ exp.location }}</i> as a <b style="font-size: x-large;">{{ exp.title }}</b> 
                     from <b>{{ exp.duration_start.strftime("%Y-%b-%d") }}</b>{{ (" till <b>" + exp.duration_end.strftime("%Y-%b-%d") + "</b>" if exp.duration_end else "") | safe }}.</p></td>
@@ -55,7 +55,7 @@
                 {% for edu in education %}
                     <tr>
                     <td>
-                        <a href="{{ edu.institution_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}"></a>
+                        <a href="{{ edu.institution_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + edu.institution_logo + '.webp') }}" alt="{{ edu.institution }}"></a>
                     </td>
                     <td><p>Stud{{ "ied" if edu.duration_end < curr_date else "ying" }} at <b>{{ edu.institution }}</b> located at <i>{{ edu.location }}</i>. <b>{{ edu. degree }}</b> in <b>{{ edu.major }}</b>
                     {{ (" with specialization in <i>" + edu.minor + "</i>" if edu.minor else "") | safe }} from <b>{{ edu.duration_start.strftime("%Y-%b-%d") }}</b> to 
