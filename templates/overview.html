@@ -30,7 +30,7 @@
                         </div>
                         <div class="detail-box">
                             <a href="{{ edu.institution_link }}" class="timeline-logo-link">
-                                <img src="{{ url_for('static', path='logos/' + edu.institution_logo) }}" alt="{{ edu.institution }}" class="logo">
+                                <img src="{{ url_for('static', path='logos/' + edu.institution_logo + '.webp') }}" alt="{{ edu.institution }}" class="logo" fetchpriority="low">
                             </a>
                             <div class="details">
                                 <strong>Degree:</strong> {{ edu.degree }}<br>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="detail-box">
                         <a href="{{ exp.company_link }}" class="timeline-logo-link">
-                                <img src="{{ url_for('static', path='logos/' + exp.company_logo) }}" alt="{{ exp.company }}" class="logo">
+                                <img src="{{ url_for('static', path='logos/' + exp.company_logo + '.webp') }}" alt="{{ exp.company }}" class="logo" fetchpriority="low">
                             </a>
                             <div class="details">
                                 <strong>Title:</strong> {{ exp.title}}<br>
