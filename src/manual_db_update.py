@@ -9,6 +9,7 @@ def manual_add_db_entries(commands: list[dict]):
         db = next(get_db())
         table = cmds["table"]
         data = cmds["data"]  # e.g. {"title": "Something new"}
+        data["fk_user"] = 1
         print(f"Adding data for {table=} with {data=}")
         db_ops.add_data_to_table(db, table_name=table, data=data)
         db.close()
@@ -59,10 +60,10 @@ def manual_read_db_entries(reqd_tables: list[str] = None):
 
 
 if __name__ == "__main__":
-    add_commands = []
-    # manual_add_db_entries(add_commands)
-    update_commands = []
+    add_commands = [{"table": "", "data": {}}]
+    manual_add_db_entries(add_commands)
+    update_commands = [{}]
     # manual_update_db_entries(update_commands)
-    delete_commands = []
+    delete_commands = [{}]
     # manual_delete_db_entries(delete_commands)
     manual_read_db_entries(reqd_tables=["basic_info"])
