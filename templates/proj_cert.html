@@ -32,7 +32,7 @@
             <tbody class="three-cols">
                 {% for cert in certifications %}
                     <tr>
-                    <td><b>{{ cert.title }}</b> issued by {{ cert.issuer }}</td>
+                    <td><b>{{ cert.title }}</b> {{ " issued by " if cert.link else " at " }} {{ cert.issuer }}</td>
                     <td><p class="justify-text">{{ cert.description }}</p></td>
                     {% if cert.link %}
                         <td><p><a href="{{ cert.link }}">Certificate</a> earned on <b>{{ cert.achievement_date.strftime("%Y-%m-%d") }}</b></p></td>
