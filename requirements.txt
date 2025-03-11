@@ -1,10 +1,6 @@
+databases
 fastapi
-httpcore
-Jinja2
 pydantic
 pytest
 python-dotenv
-requests
 SQLAlchemy
-urllib3
-uvicorn
