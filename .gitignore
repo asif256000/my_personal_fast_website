@@ -6,3 +6,5 @@
 .pytest*
 *.log
 *.status
+*.egg-info
+*.egg
