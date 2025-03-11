@@ -47,6 +47,7 @@ tables_and_inputs = [
             "degree": "BSc Computer Science",
             "duration_start": date(2015, 9, 1),
             "duration_end": date(2019, 6, 1),
+            "fk_user": 1,
         },
     ),
     (
@@ -56,6 +57,7 @@ tables_and_inputs = [
             "title": "Software Engineer",
             "duration_start": date(2019, 6, 1),
             "tech_stack": "Python, SQL, Docker",
+            "fk_user": 1,
         },
     ),
     (
@@ -63,6 +65,7 @@ tables_and_inputs = [
         {
             "title": "My Awesome Project",
             "description": "This is my awesome project",
+            "fk_user": 1,
         },
     ),
     (
@@ -71,6 +74,7 @@ tables_and_inputs = [
             "skill": "Python",
             "subcategory": "Programming Languages",
             "proficiency": "Advanced",
+            "fk_user": 1,
         },
     ),
     (
@@ -79,6 +83,7 @@ tables_and_inputs = [
             "title": "Google Cloud Professional Data Engineer",
             "issuer": "Google",
             "achievement_date": date(2020, 1, 1),
+            "fk_user": 1,
         },
     ),
     (
@@ -86,6 +91,7 @@ tables_and_inputs = [
         {
             "title": "Best Employee",
             "description": "From Google",
+            "fk_user": 1,
         },
     ),
     (
@@ -93,6 +99,7 @@ tables_and_inputs = [
         {
             "interest": "Basketball",
             "subcategory": "Sports",
+            "fk_user": 1,
         },
     ),
 ]
