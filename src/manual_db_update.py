@@ -56,6 +56,37 @@ def manual_read_db_entries(reqd_tables: list[str] = None):
         for entry in db_ops.read_data_from_table(db, table_name):
             print(f"{table_name=}")
             pprint(vars(entry))
+        if table_name == "skills":
+            skills_data = db_ops.read_data_from_table(db, table_name)
+            # Group skills by user
+            skills_by_user = {}
+            for skill in skills_data:
+                user_id = skill.fk_user
+                if user_id not in skills_by_user:
+                    skills_by_user[user_id] = {}
+
+                # Group by subcategory within each user
+                subcategory = skill.subcategory
+                if subcategory not in skills_by_user[user_id]:
+                    skills_by_user[user_id][subcategory] = {}
+
+                # Group by proficiency within each subcategory
+                proficiency = skill.proficiency
+                if proficiency not in skills_by_user[user_id][subcategory]:
+                    skills_by_user[user_id][subcategory][proficiency] = []
+
+                skills_by_user[user_id][subcategory][proficiency].append(skill)
+
+            # Display the grouped skills
+            print(f"\n{table_name}=")
+            for user_id, subcategories in skills_by_user.items():
+                print(f"User ID: {user_id}")
+                for subcategory, proficiencies in subcategories.items():
+                    print(f"Subcategory: {subcategory}")
+                    for proficiency, skills in proficiencies.items():
+                        print(f"  Proficiency: {proficiency}")
+                        curr_skills = ", ".join([skill.skill for skill in skills])
+                        print(f"    - {curr_skills}")
     db.close()
 
 
