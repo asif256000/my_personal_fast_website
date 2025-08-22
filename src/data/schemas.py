@@ -163,6 +163,7 @@ class ResumeBase(BaseModel):
     file_path: str
     is_latest: bool
     fk_user: int
+    file_content: bytes | None = None
 
 
 class ResumeCreate(ResumeBase):

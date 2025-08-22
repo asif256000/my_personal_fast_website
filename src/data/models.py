@@ -1,4 +1,4 @@
-from sqlalchemy import JSON, Boolean, Column, Date, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, Column, Date, ForeignKey, Integer, LargeBinary, String
 from sqlalchemy.orm import relationship
 
 from .db_init import Base  # , SECRET_KEY
@@ -135,6 +135,7 @@ class Resume(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     file_path = Column(String)
+    file_content = Column(LargeBinary)
     is_latest = Column(Boolean)
     fk_user = Column(Integer, ForeignKey("basic_info.id"))
 
