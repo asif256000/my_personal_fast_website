@@ -7,3 +7,6 @@ SQLAlchemy
 uvicorn
 sqlalchemy-utils
 cryptography
+python-jose[cryptography]
+python-multipart
+passlib[bcrypt]
