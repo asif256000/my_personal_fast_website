@@ -43,6 +43,7 @@ footer {
   background-color: #e6e5e5;
   padding: 10px;
   text-align: center;
+  position: relative;
 }
 
 p {
