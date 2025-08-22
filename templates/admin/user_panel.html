@@ -1,0 +1,73 @@
+{% extends "admin/admin_base.html" %}
+
+{% block title %}User Panel - {{ user.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="admin-header">
+        <h1>User Management - {{ user.name }}</h1>
+        <div class="admin-nav">
+            <a href="/admin/dashboard">← Back to Dashboard</a>
+            <a href="/">View Website</a>
+            <a href="/admin/logout">Logout</a>
+        </div>
+    </div>
+    
+    <div class="breadcrumb">
+        <a href="/admin/dashboard">Dashboard</a> > User: {{ user.name }} (ID: {{ user.id }})
+    </div>
+    
+    <div class="user-info">
+        <h3>User Information</h3>
+        <p><strong>Name:</strong> {{ user.name or "N/A" }}</p>
+        <p><strong>Email:</strong> {{ user.email or "N/A" }}</p>
+        <p><strong>Phone:</strong> {{ user.phone or "N/A" }}</p>
+        <p><strong>Location:</strong> {{ user.location or "N/A" }}</p>
+    </div>
+    
+    <h2>Data Tables</h2>
+    <p>Select a table to edit the data:</p>
+    
+    <div class="tables-grid">
+        {% for table_name in table_names %}
+        <div class="table-card">
+            <h3>{{ table_name.replace("_", " ").title() }}</h3>
+            <div class="table-info">
+                {% set record_count = table_data[table_name]|length %}
+                <div class="record-count">
+                    {{ record_count }} record{{ "s" if record_count != 1 else "" }}
+                </div>
+                
+                {% if table_data[table_name] %}
+                    {% if table_name == "basic_info" %}
+                        <p><small>Basic user information</small></p>
+                    {% elif table_name == "education" %}
+                        <p><small>{{ table_data[table_name]|length }} education entries</small></p>
+                    {% elif table_name == "experience" %}
+                        <p><small>{{ table_data[table_name]|length }} work experiences</small></p>
+                    {% elif table_name == "skills" %}
+                        <p><small>{{ table_data[table_name]|length }} skills listed</small></p>
+                    {% elif table_name == "projects" %}
+                        <p><small>{{ table_data[table_name]|length }} projects</small></p>
+                    {% elif table_name == "certifications" %}
+                        <p><small>{{ table_data[table_name]|length }} certifications</small></p>
+                    {% elif table_name == "honors_and_awards" %}
+                        <p><small>{{ table_data[table_name]|length }} honors and awards</small></p>
+                    {% elif table_name == "interests" %}
+                        <p><small>{{ table_data[table_name]|length }} interests</small></p>
+                    {% elif table_name == "resume" %}
+                        <p><small>{{ table_data[table_name]|length }} resume files</small></p>
+                    {% endif %}
+                {% else %}
+                    <p><small>No data in this table</small></p>
+                {% endif %}
+            </div>
+            
+            <a href="/admin/user/{{ user.id }}/table/{{ table_name }}" class="edit-table-btn">
+                Edit {{ table_name.replace("_", " ").title() }}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

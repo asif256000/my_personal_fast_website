@@ -1,0 +1,40 @@
+{% extends "admin/admin_base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <div class="admin-nav">
+            <a href="/">View Website</a>
+            <a href="/admin/logout">Logout</a>
+        </div>
+    </div>
+    
+    <div class="breadcrumb">
+        Dashboard > User Management
+    </div>
+    
+    <h2>Users in System</h2>
+    <p>Select a user to manage their data:</p>
+    
+    <div class="dashboard-grid">
+        {% for user in users %}
+        <div class="user-card">
+            <h3>{{ user.name or "Unnamed User" }}</h3>
+            <p><strong>ID:</strong> {{ user.id }}</p>
+            <p><strong>Email:</strong> {{ user.email or "Not provided" }}</p>
+            <p><strong>Phone:</strong> {{ user.phone or "Not provided" }}</p>
+            <p><strong>Location:</strong> {{ user.location or "Not provided" }}</p>
+            <a href="/admin/user/{{ user.id }}">Manage User Data</a>
+        </div>
+        {% else %}
+        <div class="user-card">
+            <h3>No Users Found</h3>
+            <p>No users are currently in the system.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

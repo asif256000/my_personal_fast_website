@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}Admin Panel{% endblock %}</title>
+    <link href="{{ url_for('static', path='/logos/profile_logo.ico') }}" rel="icon">
+    <link href="{{ url_for('static', path='/base-style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/dark-mode.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/responsive-buttons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/responsive.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/table-styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/admin-panel-style.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='/dark-mode.js') }}" defer></script>
+    <script src="{{ url_for('static', path='/scroll-functions.js') }}"></script>
+    <script src="{{ url_for('static', path='/other-actions.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block static_links %}{% endblock %}
+    {% block head_scripts %}{% endblock %}
+</head>
+
+<body>
+    <!-- Keep scroll and dark mode functionality -->
+    <button id="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">▲</button>
+    <button id="scroll-to-bottom" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })">▼</button>
+
+    <div class="dark-mode-toggle">
+        <p id="toggle-text"></p>
+        <input type="checkbox" id="dark-mode-toggle">
+        <label for="dark-mode-toggle">
+            <span class="toggle-icon" id="moon">&#127761;</span>
+            <span class="toggle-icon" id="sun">&#127774;</span>
+        </label>
+    </div>
+
+    <div id="wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block body_scripts %}{% endblock %}
+</body>
+
+</html>

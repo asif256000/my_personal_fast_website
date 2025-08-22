@@ -1,0 +1,35 @@
+{% extends "admin/admin_base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2 style="text-align: center; margin-bottom: 30px;">Admin Login</h2>
+    
+    <form class="login-form" action="/admin/login" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+    
+    {% if request.query_params.get("error") == "invalid" %}
+    <div class="error-message">Invalid username or password</div>
+    {% endif %}
+    
+    {% if error %}
+    <div class="error-message">{{ error }}</div>
+    {% endif %}
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/" style="color: #007bff; text-decoration: none;">← Back to Website</a>
+    </div>
+</div>
+{% endblock %}
