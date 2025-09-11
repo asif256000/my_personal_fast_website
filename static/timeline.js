@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const pixelsPerMonth = 10;
   const topOffset = 60; // Increased offset by 60px
 
+  // Get current date to cap the timeline
+  const currentDate = new Date();
+  const currentYear = currentDate.getUTCFullYear();
+  const currentMonth = currentDate.getUTCMonth();
+
   function calculatePosition(event) {
     const startDate = event.getAttribute("data-start");
     let endDate = event.getAttribute("data-end");
@@ -24,6 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     end.setDate(15); // Set the date to the middle of the month
+
+    // Cap end date to current date if it's in the future
+    if (
+      end.getUTCFullYear() > currentYear ||
+      (end.getUTCFullYear() === currentYear && end.getUTCMonth() > currentMonth)
+    ) {
+      end = new Date(currentYear, currentMonth, 15);
+    }
 
     // Update the maximum endYear and corresponding endMonth found so far
     if (end.getUTCFullYear() > endYear) {
@@ -83,7 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   timelineEvents.forEach(calculatePosition);
   timelineEvents.forEach(addHoverEffect);
-  endMonth = endMonth + 2;
+
+  // Set timeline end to current date, not beyond it
+  endYear = currentYear;
+  endMonth = currentMonth + 2;
 
   function appendStartDashedLineSegment(noOfMonths) {
     const dashedLineSegment = document.createElement("div");
