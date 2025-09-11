@@ -1,3 +1,4 @@
+from datetime import datetime
 from pprint import pprint
 
 from data import db_ops
@@ -91,10 +92,20 @@ def manual_read_db_entries(reqd_tables: list[str] = None):
 
 
 if __name__ == "__main__":
-    add_commands = [{"table": "", "user_id": 0, "data": {}}]
+    add_commands = [{"table": "", "user_id": 1, "data": {}}]
     # manual_add_db_entries(add_commands)
-    update_commands = [{}]
+    update_commands = [{"table": "", "lookup_id": 1, "updated_data": {}}]
     # manual_update_db_entries(update_commands)
     delete_commands = [{}]
     # manual_delete_db_entries(delete_commands)
-    manual_read_db_entries(reqd_tables=["projects"])
+    manual_read_db_entries(reqd_tables=[
+            # "basic_info",
+            # "education",
+            # "experience",
+            # "skills",
+            # "projects",
+            # "certifications",
+            # "honors_and_awards",
+            # "interests",
+            # "resume"
+            ])

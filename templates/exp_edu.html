@@ -10,7 +10,7 @@
             <h2>Experience</h2>
             <table>
             <tbody class="detailed-two-cols">
-                {% for exp in experience %}
+                {% for exp in experience | sort(attribute='duration_start', reverse=true) %}
                     <tr>
                     <td>
                     <a href="{{ exp.company_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + exp.company_logo + '.webp') }}" alt="{{ exp.company }}"></td></a>
@@ -52,7 +52,7 @@
             <h2>Education</h2>
             <table>
             <tbody class="detailed-two-cols">
-                {% for edu in education %}
+                {% for edu in education | sort(attribute='duration_start', reverse=true) %}
                     <tr>
                     <td>
                         <a href="{{ edu.institution_link }}" class="image-link"><img src="{{ url_for('static', path='/logos/' + edu.institution_logo + '.webp') }}" alt="{{ edu.institution }}"></a>
